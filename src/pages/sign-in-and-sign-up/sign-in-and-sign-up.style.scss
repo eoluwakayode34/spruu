@@ -1,0 +1,44 @@
+.sign-in-and-sign-up{
+    height: 76vh;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sign-container{
+    margin: 3rem;
+    display: flex;
+}
+
+.button-box{
+    display: flex;
+    
+}
+
+
+.button-toggle{
+    background: #FAFAFA;
+    border: 0.3px solid  #dbdbdb;
+    box-sizing: border-box;
+    color:#767676   ;
+    flex: 1;
+    justify-content: center;
+    text-align: center  ;
+    padding: 2rem;
+    cursor: pointer;
+
+}
+
+.button-toggle.active{
+    background: #FFFFFF;
+    color: #CA8831;
+    border: none;
+}
+
+.input-group{
+    width: 100%;
+    display: block  ;
+}
+
+

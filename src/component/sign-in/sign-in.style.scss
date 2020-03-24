@@ -1,0 +1,35 @@
+.forget-password{
+    display: flex;
+}
+
+.b-r{
+    border-right: 1.7px solid #767676;
+}
+
+.flex-1{
+    display: flex;
+    flex: 1;
+    padding: .5rem 2rem;
+}
+
+.mt{
+    margin-top: 3rem;
+}
+
+.sign-up-link{
+    padding-left: 1.2rem;
+}
+
+.sign-up-link:link, .sign-up-link:visited {
+
+    color: #CA8831 ;
+
+
+}
+
+.sign-up-link:hover,  .sign-up-link:active  {
+
+    color: grey ;
+
+
+}

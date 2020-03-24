@@ -1,0 +1,29 @@
+$color-primary: #CA8831;
+
+.custom-button {
+    min-width: 165px;
+    width: auto;
+    height: 50px;
+    letter-spacing: 0.5px;
+    line-height: 50px;
+    padding: 0 35px 0 35px;
+    font-size: 15px;
+    background-color: $color-primary;
+    color: white;
+    text-transform: uppercase;
+    font-family: inherit;
+    font-weight: 400;
+
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    letter-spacing: 2px;
+    text-align: center;
+  
+    &:hover {
+      background-color: white;
+      color: $color-primary;
+      border: 1px solid $color-primary;
+    }
+  }
+  

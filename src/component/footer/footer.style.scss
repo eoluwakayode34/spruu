@@ -1,0 +1,28 @@
+
+$color-primary: #CA8831;
+.footer{  
+    color: $color-primary;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid $color-primary;
+   max-height: 8rem;
+ 
+    
+    &-container{
+        display: flex;
+        justify-content: space-between ;
+        align-items: center;
+    }
+}
+.social-link-item-icon{
+
+ 
+    margin: 0;
+    height: 1.7rem;
+
+
+}
+.social-link-item:not(:last-child){
+    margin-right: 2rem;
+
+}
