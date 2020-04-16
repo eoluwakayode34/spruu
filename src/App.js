@@ -9,6 +9,7 @@ import SignUpPage from './pages/sign-up-page/sign-up-page.component';
 import FindALecturer from './pages/find-a-lecturer/find-a-lecturer.compoent';
 import RateALecturer from './pages/rate-a-lecturer/rate-a-lecturer.component';
 import RateASchool from './pages/rate-a-school/rate-a-school.component';
+import Review from './pages/review/review.component';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path='/find-a-lecturer' component={FindALecturer} />
             <Route path='/rate-a-lecturer' component={RateALecturer} />
             <Route path='/rate-a-school' component={RateASchool} />
+            <Route path='/review' component={Review}/>
 
           </Switch>
         <Footer/>

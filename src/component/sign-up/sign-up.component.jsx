@@ -24,9 +24,10 @@ class SignUp extends React.Component {
             <div>
 
            
-            <FormInput placeholder='Email' />
-            <FormInput placeholder='Password' />
-            <FormInput placeholder='Confirm Password' />
+            <FormInput placeholder='Email'  type="email" 
+                name='email' />
+            <FormInput placeholder='Password' type="password" />
+            <FormInput placeholder='Confirm Password'  type="password"/>
             <CustomButton>SIGN UP</CustomButton>
             </div>
         
