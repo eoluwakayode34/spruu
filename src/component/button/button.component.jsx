@@ -1,10 +1,9 @@
 import React from 'react';
 import './button.style.scss'
 
-const RatingButton = ({children}) => (
+const RatingButton = () => (
 
-    <div className='rating-button-container'>
-        <h4 className='rating-heading'>{children}</h4>
+    
         <div className="button-group">
             <button type='button' className='button red'>    
                 Very Poor
@@ -24,7 +23,7 @@ const RatingButton = ({children}) => (
 
         </div>
         
-    </div>
+  
    
 )
 

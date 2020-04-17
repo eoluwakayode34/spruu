@@ -14,38 +14,70 @@ const Review = ({name}) => (
             <h3>IT YOUR TURN TO RATE <br/>
             <span className='name'>john kennedy</span></h3>
         </div>
+       
 
         <form action="">
         <div className="rating-container">
-        <RatingButton>
-        Classroom Interaction
-        </RatingButton>
-        <RatingButton>
-        Communication
-        </RatingButton>
-        <RatingButton>
-        Patience
-        </RatingButton>
-        <RatingButton>
-        Knowledge of Medical
-        </RatingButton>
-        <RatingButton>
-        Organization
-        </RatingButton>
-        <RatingButton>
-        Authority
-        </RatingButton>
-        <RatingButton>
-        Compassion
-        </RatingButton>
-        <RatingButton>
-        Rapport
-        </RatingButton>
-        <RatingButton>
-        Difficulty
-        </RatingButton>
+      
+        <div className="rating-box">
+        <h4 className='rating-heading'> Classroom Interaction</h4>
+        <RatingButton></RatingButton>
+        </div>
 
+        <div className="rating-box">
+        <h4 className='rating-heading'> Communication</h4>
+        <RatingButton></RatingButton>
+        </div>
 
+        <div className="rating-box">
+        <h4 className='rating-heading'>Patience</h4>
+        <RatingButton></RatingButton>
+        </div>
+
+        <div className="rating-box">
+        <h4 className='rating-heading'> Knowledge of Medical</h4>
+        <RatingButton></RatingButton>
+        </div>
+
+        <div className="rating-box">
+        <h4 className='rating-heading'> Organization</h4>
+        <RatingButton></RatingButton>
+        </div>
+
+        <div className="rating-box">
+        <h4 className='rating-heading'>  Authority</h4>
+        <RatingButton></RatingButton>
+        </div>
+
+        <div className="rating-box">
+        <h4 className='rating-heading'>  Compassion</h4>
+        <RatingButton></RatingButton>
+        </div>
+
+        <div className="rating-box">
+        <h4 className='rating-heading'>  Rapport</h4>
+        <RatingButton></RatingButton>
+        </div>
+
+        <div className="rating-box">
+        <h4 className='rating-heading'>   Difficulty</h4>
+        <RatingButton></RatingButton>
+        </div>
+
+        <div className="">
+        <h4 className='rating-heading'>Would you take this Lecturer Again ? </h4>
+            <div>
+
+            </div>
+        </div>
+
+        <div className="rating-box-review">
+        <h4 className='rating-heading'>Review</h4>
+        <textarea placeholder='write your review'>
+        </textarea>
+        </div>
+
+        
         </div>
 
        
