@@ -1,6 +1,6 @@
 import React from 'react';
 import './homepage.style.scss';
-import {ReactComponent as Search} from '../../asset/search.svg'
+// import {ReactComponent as Search} from '../../asset/search.svg'
 import AutoComplete from '../../component/auto-complete/auto-complete.component';
 
 const Homepage = () => (
@@ -10,9 +10,8 @@ const Homepage = () => (
             <p className='showcase-subtitle' >Research, Rate and Review Lecturers and Schools in Nigeria</p>
             <form action="" className='form-search' >
 
-                <AutoComplete type="search" placeholder='Search for lecturer or school' className='search' />
+                <AutoComplete type="search"  className='search' />
                 
-                <Search className='search-icon' />
                 
             </form>
         </div>
@@ -21,3 +20,4 @@ const Homepage = () => (
 );
 
 export default Homepage;
+

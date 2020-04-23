@@ -7,12 +7,12 @@ import {Link} from 'react-router-dom'
 
 import './review.styles.scss'
 
-const Review = ({name}) => (
+const Review = (props) => (
     <div as='form' className='review-container'>
 
         <div className='rating-name-container'>
             <h3>IT YOUR TURN TO RATE <br/>
-            <span className='name'>john kennedy</span></h3>
+            <span className='name'>{props.match.params.slug}</span></h3>
         </div>
        
 

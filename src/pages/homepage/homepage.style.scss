@@ -8,6 +8,7 @@ $color-primary: #CA8831;
     flex-direction: column;
     justify-content: center;
     margin: 5% 0;
+    height: 40vh;
 
    
 
@@ -35,7 +36,7 @@ $color-primary: #CA8831;
 }
 
 .form-search{
-    width: 100%;
+    width: 60%;
    position: relative;
     display: flex;
     align-items: center;
