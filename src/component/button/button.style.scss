@@ -43,7 +43,7 @@
 
 
 .button{
-    border-radius: 5px;
+    border-radius: 2px;
     font-size: 1.5rem;
     font-weight: 600;
     text-transform: capitalize;
@@ -53,14 +53,15 @@
     border: none; 
     margin: 1rem;
     cursor: pointer;
-    transition: background .2s ease-in;
+    transition: background .1s ease-in;
 
 
 }
 
-.button-group{
+.form-group{
     display: flex;
-    margin: .5rem 0;
+
+    
 }
 
 .rating-heading{
@@ -68,3 +69,44 @@
     font-weight: 400;
     margin-right: 2rem;
 }
+
+
+.form-radio{
+    &__input{
+        display: none;
+        background: red;
+        width: 4rem;
+    }
+
+    &__group{
+        margin: 2.3rem 0;
+    }
+
+}
+
+.form-radio__input:checked ~ .red{
+    background: #EF261F;
+    color: white;
+}
+
+.form-radio__input:checked ~ .orange{
+    background: #F5621D;
+    color: white;
+}
+
+.form-radio__input:checked ~ .yellow{
+    background: #F3D71E;
+    color: white;
+}
+
+.form-radio__input:checked ~ .lemon{
+    background: #A4F629;
+    color: white;
+}
+
+.form-radio__input:checked ~ .green{
+    background: #43C51D;
+    color: white;
+}
+
+

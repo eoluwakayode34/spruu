@@ -16,7 +16,7 @@ import SchoolData from "../../data/data";
 // getSectionSuggestions={getSectionSuggestions}
 // inputProps={inputProps}
 
-const ReviewResult = (props) => {
+const SchoolReviewResult = (props) => {
   const [percentage, setPercentage] = useState(60);
   const [viewData, setViewData] = useState(null);
 
@@ -35,8 +35,7 @@ const ReviewResult = (props) => {
     <div className="review-result-container">
       <div className="review-person-box">
         <div className="review-image-container">
-          
-          <img src={viewData.imgUrl} alt="" className='review-image'/> 
+          <img src={viewData.imgUrl} alt="" className="review-image" />
         </div>
         <div className="name-and-attr">
           <h3 className="result-name">{viewData.name}</h3>
@@ -50,7 +49,7 @@ const ReviewResult = (props) => {
               starRatedColor="#CA8831"
             />
           </div>
-          <Link exact to={ "/review/" + viewData.name} className="review-btn">
+          <Link exact to={"/review/" + viewData.name} className="review-btn">
             REVIEW {viewData.name}
           </Link>
         </div>
@@ -60,8 +59,18 @@ const ReviewResult = (props) => {
       <div className="review-category-box">
         <div className="rating-category">
           <div className="rating-category-item">
+            <div className="rating-category-item-text">Career Prospects</div>
+            <StarRatings
+              rating={2.403}
+              starDimension="1.3rem"
+              starSpacing=".2rem"
+              starRatedColor="#CA8831"
+            />
+          </div>
+
+          <div className="rating-category-item">
             <div className="rating-category-item-text">
-              Classroom Interaction
+              Extracurricular Activities
             </div>
             <StarRatings
               rating={2.403}
@@ -72,17 +81,7 @@ const ReviewResult = (props) => {
           </div>
 
           <div className="rating-category-item">
-            <div className="rating-category-item-text">Patience</div>
-            <StarRatings
-              rating={2.403}
-              starDimension="1.3rem"
-              starSpacing=".2rem"
-              starRatedColor="#CA8831"
-            />
-          </div>
-
-          <div className="rating-category-item">
-            <div className="rating-category-item-text">Communication</div>
+            <div className="rating-category-item-text">Safety and Location</div>
             <StarRatings
               rating={3}
               starDimension="1.3rem"
@@ -93,7 +92,7 @@ const ReviewResult = (props) => {
 
           <div className="rating-category-item">
             <div className="rating-category-item-text">
-              Knowledge of Material
+              Learning and materials
             </div>
             <StarRatings
               rating={2.403}
@@ -104,7 +103,7 @@ const ReviewResult = (props) => {
           </div>
 
           <div className="rating-category-item">
-            <div className="rating-category-item-text">Organization</div>
+            <div className="rating-category-item-text">Food and Health</div>
             <StarRatings
               rating={2.403}
               starDimension="1.3rem"
@@ -114,7 +113,9 @@ const ReviewResult = (props) => {
           </div>
 
           <div className="rating-category-item">
-            <div className="rating-category-item-text">Compassion</div>
+            <div className="rating-category-item-text">
+              behaviour and Morals
+            </div>
             <StarRatings
               rating={2.403}
               starDimension="1.3rem"
@@ -124,7 +125,9 @@ const ReviewResult = (props) => {
           </div>
 
           <div className="rating-category-item">
-            <div className="rating-category-item-text">Authority</div>
+            <div className="rating-category-item-text">
+              Learning Environment
+            </div>
             <StarRatings
               rating={2.403}
               starDimension="1.3rem"
@@ -134,7 +137,9 @@ const ReviewResult = (props) => {
           </div>
 
           <div className="rating-category-item">
-            <div className="rating-category-item-text">Rapport</div>
+            <div className="rating-category-item-text">
+              Personal Development
+            </div>
             <StarRatings
               rating={2.403}
               starDimension="1.3rem"
@@ -232,4 +237,4 @@ const ReviewResult = (props) => {
   ) : null;
 };
 
-export default ReviewResult;
+export default SchoolReviewResult;

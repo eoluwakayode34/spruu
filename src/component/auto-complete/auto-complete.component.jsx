@@ -80,7 +80,7 @@ const schoolData = SchoolData;
     render() {
       const { value, suggestions } = this.state;
       const inputProps = {
-        placeholder: "Type the name of your school or institution",
+        placeholder: "Search for Lecturer of School",
         value,
         onChange: this.onChange
       };

@@ -2,6 +2,8 @@ import React from 'react';
 import './homepage.style.scss';
 // import {ReactComponent as Search} from '../../asset/search.svg'
 import AutoComplete from '../../component/auto-complete/auto-complete.component';
+import { FaSearch } from "react-icons/fa";
+
 
 const Homepage = () => (
     <div className="container">
@@ -11,6 +13,7 @@ const Homepage = () => (
             <form action="" className='form-search' >
 
                 <AutoComplete type="search"  className='search' />
+                <FaSearch className='search-icon' />
                 
                 
             </form>

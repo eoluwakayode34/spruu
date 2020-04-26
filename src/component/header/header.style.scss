@@ -1,12 +1,12 @@
 $color-primary: #CA8831;
 
-@mixin btn{
+@mixin btn {
     padding: .5rem 2rem;
     border-radius: 2px;
     border: 1px solid $color-primary;
 }
 
-.header{
+.header {
     background: white;
     height: 8rem;
     border-bottom: 1px solid $color-primary;
@@ -15,77 +15,84 @@ $color-primary: #CA8831;
     position: sticky;
     top: 0;
     z-index: 1000000;
-  
 
-    &-container{
+
+    &-container {
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
 }
 
-.navigation{
+.navigation {
     color: $color-primary;
-    .nav-link{
+
+    .nav-link {
         transition: all .4s;
     }
 
 
-    .nav-item:not(:last-child){
+    .nav-item:not(:last-child) {
         margin-right: 1rem;
     }
-    .nav-link:link, .nav-link:visited{
+
+    .nav-link:link,
+    .nav-link:visited {
         color: $color-primary;
     }
 
-    .nav-link:hover, .nav-link:active{
+    .nav-link:hover,
+    .nav-link:active {
         color: grey;
         transform: scale(1.1);
 
 
     }
 
-    .button-sign-in{
+    .button-sign-in {
         @include btn;
         color: $color-primary;
         margin-left: 2rem;
 
 
-        &:hover{
-            box-shadow:  0 0 4px rgba(124, 123, 123, 0.534);
+        &:hover {
+            box-shadow: 0 0 4px rgba(124, 123, 123, 0.534);
         }
 
-        &:active{
-            box-shadow:  0 1px 2.5px rgba(124, 123, 123, 0.534);
+        &:active {
+            box-shadow: 0 1px 2.5px rgba(124, 123, 123, 0.534);
             transform: translateY(-20px);
 
         }
-       
+
     }
 
-    
-    
 
-    .button-sign-up{
+
+
+    .button-sign-up {
         @include btn;
         background-color: $color-primary;
         color: white;
 
-        &:hover{
-            box-shadow:  0 0 4px rgba(124, 123, 123, 0.534);
+        &:hover {
+            box-shadow: 0 0 4px rgba(124, 123, 123, 0.534);
         }
 
-        &:active{
-            box-shadow:  0 1px 2.5px rgba(124, 123, 123, 0.534);
+        &:active {
+            box-shadow: 0 1px 2.5px rgba(124, 123, 123, 0.534);
             transform: translateY(-20px);
 
         }
 
 
-       
+
 
 
     }
 }
 
-
+.active {
+   border: 1px solid #CA8831;
+    padding: .6rem;
+}
