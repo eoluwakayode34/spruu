@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {NavLink, Link} from 'react-router-dom';
 import {ReactComponent as Logo} from '../../asset/home.svg';
 import './header.style.scss';
+import  Burger from '../Burger/burger.component';
+import Menu from '../Menu/menu.component'
 
-const Header = () =>(
-    <div className="header">
+
+const Header = () => {
+
+    const [open, setOpen] = useState(false);
+
+    return (
+        <div className="header">
         <div className="container">
             <div className="header-container">
     <Link to='/' className='logo-container' >
     <Logo  className='logo'/>
     </Link>
+
+    <Menu open={open} setOpen={setOpen}/>
+    <Burger open={open} setOpen={setOpen} />
 
     <div className="navigation">
         <NavLink  to='/find-a-lecturer'  className="nav-item nav-link" activeClassName='active' >Find a Lecturer</NavLink>
@@ -28,7 +38,10 @@ const Header = () =>(
     </div>
     </div>
 
+    )
+}
+    
 
-)
+
 
 export default Header;

@@ -6,6 +6,7 @@ import ProgressBar from "../../component/progress-bar/progress-bar.component";
 import Select from "react-select";
 import { flavourOptions } from "../../component/select-dropdown-data/select-dropdown.component";
 import SchoolData from "../../data/data";
+import Filter from '../../component/filter/filter.component'
 
 // suggestions={suggestions}
 // onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -208,8 +209,8 @@ const SchoolReviewResult = (props) => {
         <div className="would-take-again">
           <h3 className="would-take-again-per">75%</h3>
           <p>
-            {" "}
-            Would take this <br />
+            
+            Would take this 
             lecturer a Again
           </p>
         </div>
@@ -218,20 +219,7 @@ const SchoolReviewResult = (props) => {
       <div className="review-bar"> 274 Review </div>
 
       <div>
-        <Select
-          defaultValue={flavourOptions[2]}
-          label="Single select"
-          options={flavourOptions}
-          theme={(theme) => ({
-            ...theme,
-            borderRadius: 0,
-            colors: {
-              ...theme.colors,
-              primary25: "hotpink",
-              primary: "black",
-            },
-          })}
-        />
+        <Filter/>
       </div>
     </div>
   ) : null;

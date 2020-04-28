@@ -43,6 +43,7 @@
 
 
 .button{
+    display: flex;
     border-radius: 2px;
     font-size: 1.5rem;
     font-weight: 600;
@@ -55,11 +56,39 @@
     cursor: pointer;
     transition: background .1s ease-in;
 
+    @media screen and (max-width: 50rem) {
+        font-size: 1.4rem;
+        padding: 1rem 2rem;
+
+    }
+
+    
+    @media screen and (max-width: 36rem) {
+        font-size: 1.3rem;
+        padding: 1rem 1.7rem;
+        margin: .5rem;
+
+    }
+
+     
+    @media screen and (max-width: 30rem) {
+        font-size: 1.3rem;
+        padding: 1rem 1.7rem;
+        margin: 0 .5rem;
+
+    }
+
 
 }
 
 .form-group{
     display: flex;
+    justify-content: center;
+    align-items: center;
+   
+    @media only screen and (max-width: 33rem){
+        flex-wrap: wrap;
+    }
 
     
 }
@@ -79,7 +108,19 @@
     }
 
     &__group{
-        margin: 2.3rem 0;
+        margin: 1rem 0;
+        font-size: 1.5rem;
+
+        
+        @media only screen and (max-width: 50rem){
+            margin: .8rem 0;
+        }
+
+       
+
+        @media only screen and (max-width: 30rem){
+                margin: .4rem 0;
+        }
     }
 
 }

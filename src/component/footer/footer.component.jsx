@@ -10,11 +10,12 @@ const Footer = () => (
         <div className="container">
             <div className="footer-container">
         <div className="email">
-               spruureview@gmail.com
+               <span> spruureview@gmail.com</span>
             </div>
 
             <div className="copyright">
-            Copyright © 2020 SPRUU REVIEW. All rights reserved.
+            <span>Copyright © 2020 SPRUU REVIEW. All rights reserved.</span>
+
             </div>
 
             <div className="social-link">

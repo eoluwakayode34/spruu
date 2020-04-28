@@ -1,3 +1,50 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+  font-size: 16px;
+}
+
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 64.5%;
+
+  
+  @media only screen and (max-width: 43rem){
+    font-size: 55%;
+  }
+
+  @media only screen and (max-width: 24rem){
+    font-size: 45%;
+}
+
+  @media only screen and (max-width: 20rem){
+    font-size: 40%;
+  }
+
+
+
+
+}
+
+
 a{
   text-decoration: none;
 }

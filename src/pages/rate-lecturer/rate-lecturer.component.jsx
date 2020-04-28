@@ -78,7 +78,7 @@ const RateLecturer = (props) => {
 
           <div className="rating-box">
             <h4 className="rating-heading">
-              Would you take this <br /> Lecturer Again ?{" "}
+              Would you take this Lecturer Again ?
             </h4>
             <div className="form-button__group">
               <div>
@@ -87,13 +87,12 @@ const RateLecturer = (props) => {
                     <input
                       type="radio"
                       name='question'
-                      id="good"
                       className="form-radio__input"
-                      value="poor"
+                      value=""
                     />
                     <span className="button lemon w">YES</span>
                   </label>
-                </div>{" "}
+                </div>
               </div>
               <div>
                 <div className="form-radio__group">
@@ -101,13 +100,12 @@ const RateLecturer = (props) => {
                     <input
                       type="radio"
                       name='question'
-                      id="good"
                       className="form-radio__input"
-                      value="poor"
+                      value=""
                     />
                     <span className="button red w">NO</span>
                   </label>
-                </div>{" "}
+                </div>
               </div>
             </div>
           </div>

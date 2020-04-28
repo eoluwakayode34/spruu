@@ -61,7 +61,7 @@ const SignIn = (props) => {
 
       <div className="forget-password">
         <div className="b-r flex-1 mt"> Forget my Password? </div>
-        <div className="flex-1 mt">
+        <div className="flex-1 mt no-account">
           {" "}
           Don’t have an account?
           <Link to="/signup" className="sign-up-link">

@@ -75,7 +75,7 @@ class FindALecturer extends React.Component {
     return (
       <div className="content">
         <FormContainer>
-          <div className="container">
+          <div className="find-lecturer-container">
             <h2>Find a Lecturer</h2>
             <Autosuggest
               suggestions={suggestions}

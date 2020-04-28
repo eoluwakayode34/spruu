@@ -1,5 +1,6 @@
 $color-primary: #CA8831;
 
+
 .showcase{
     background: white;
     color: $color-primary;
@@ -10,16 +11,26 @@ $color-primary: #CA8831;
     margin: 5% 0;
     height: 40vh;
 
+    @media only screen and (max-width: 803px) {
+        height: 50vh;
+    }
+
+
    
 
     &-title{
         font-size: 6rem;
+        text-align: center;
+
+      
     }
     &-subtitle{
         font-size: 2rem;
         letter-spacing: 1;
         font-weight: lighter;
         margin-bottom: 2rem;
+        text-align: center;
+       
     }
 }
 
@@ -29,8 +40,13 @@ $color-primary: #CA8831;
     margin-left: -5rem;
     width: 5rem;
     position: absolute;
-    top: 35%;
+    top: 30%;
     right: 0%;
+
+    @media only screen and (max-width: 18rem){
+        display: none;
+        top: 20%;   
+    }
     
     
 }
@@ -41,6 +57,14 @@ $color-primary: #CA8831;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media only screen and (max-width: 48rem){
+        width: 80%;
+    }
+
+    @media only screen and (max-width: 24rem){
+        width: 100%;
+    }
 }
 
 
@@ -48,3 +72,12 @@ $color-primary: #CA8831;
 .search:focus + .search-icon{
     display: none;
 }
+
+.search::placeholder{
+    font-size: 1.4rem;
+
+    @media only screen and (max-width: 18rem){
+        font-size: 1rem;
+    }
+}
+

@@ -21,6 +21,7 @@ const RateSchool = (props) => {
   };
 
   return (
+     <form action="">
     <div as="form" className="review-container">
       <div className="rating-name-container">
         <h3>
@@ -29,7 +30,7 @@ const RateSchool = (props) => {
         </h3>
       </div>
 
-      <form action="">
+     
         <div className="rating-container">
           <div className="rating-box">
             <h4 className="rating-heading"> {name.career}</h4>
@@ -73,12 +74,12 @@ const RateSchool = (props) => {
 
        
 
-          <div className="rating-box">
-            <h4 className="rating-heading">
-              Would you take this <br /> School Again ?{" "}
+          <div className="rating-box mb-1">
+            <h4 className="rating-heading mb-1">
+              Would you take this School Again ?{" "}
             </h4>
             <div className="form-button__group">
-              <div>
+              
                 <div className="form-radio__group">
                   <label>
                     <input
@@ -90,9 +91,9 @@ const RateSchool = (props) => {
                     />
                     <span className="button lemon w">YES</span>
                   </label>
-                </div>{" "}
-              </div>
-              <div>
+                </div>
+              
+              
                 <div className="form-radio__group">
                   <label>
                     <input
@@ -104,13 +105,13 @@ const RateSchool = (props) => {
                     />
                     <span className="button red w">NO</span>
                   </label>
-                </div>{" "}
-              </div>
+                </div>
+              
             </div>
           </div>
 
-          <div className="rating-box">
-            <h4 className="rating-heading">Review</h4>
+          <div className="rating-box ">
+            <h4 className="rating-heading mb-1">Review</h4>
             <textarea placeholder="write your review"></textarea>
           </div>
         </div>
@@ -154,8 +155,9 @@ const RateSchool = (props) => {
         <Link to="/review" className="cancelBtn">
           CANCEL
         </Link>
-      </form>
+     
     </div>
+    </form>
   );
 };
 export default RateSchool;
