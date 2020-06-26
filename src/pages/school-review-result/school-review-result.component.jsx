@@ -3,10 +3,9 @@ import "./review-result.styles.scss";
 import { Link } from "react-router-dom";
 import StarRatings from "../../component/star-ratings/star-ratings.component";
 import ProgressBar from "../../component/progress-bar/progress-bar.component";
-import Select from "react-select";
-import { flavourOptions } from "../../component/select-dropdown-data/select-dropdown.component";
 import SchoolData from "../../data/data";
 import Filter from '../../component/filter/filter.component'
+import ReviewList from '../../component/review-list/review-list.component'
 
 // suggestions={suggestions}
 // onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -220,6 +219,8 @@ const SchoolReviewResult = (props) => {
 
       <div>
         <Filter/>
+
+        <ReviewList/>
       </div>
     </div>
   ) : null;
