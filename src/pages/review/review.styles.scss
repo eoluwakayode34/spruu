@@ -1,0 +1,126 @@
+.review-container{
+    width: 70%;
+    background: transparent;
+    margin: 2rem auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+
+.rating-container{
+    
+    border: 0px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    margin: auto;
+    background: white;
+    // display: flex;
+    // justify-content: center;
+    // flex-direction: column;
+    // align-items: center;
+    // justify-self: center;
+    border-radius: 5px;
+    padding: 2rem 0;
+
+
+    &:first-child{
+        align-self: center;
+    }
+   
+  
+}
+
+.name{
+    color: #CA8831;
+}
+
+.rating-name-container h3{
+    font-size: 3rem;
+    font-weight: 400;
+    color: #767676;
+}
+
+.rating-name-container{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem; 
+    text-transform: uppercase;
+}
+
+.anonymous-text{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.8rem;
+    line-height: 20px;
+    text-align: center;
+    margin: 4rem 0;
+
+    color: #C4C4C4;
+}
+
+
+
+.terms{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem 0;
+
+
+    input[type='checkbox']{
+        margin-right: 1rem;
+        padding: 1rem;
+    }
+
+
+}
+
+.cancelBtn{
+    color: #CA8831;
+    font-weight: 500;    
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+    
+}
+
+.rating-box{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    align-self: center;
+    justify-items: end;
+
+    &-review{
+        display: grid;
+        grid-template-columns: 10rem 60rem  ;
+    }
+
+}
+
+.rating-heading{
+    align-self: center;
+}
+
+textarea{
+    
+    height: 17rem;
+    border: none;
+    background: #f3f3f3;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 1rem;
+    border-radius: 3px;
+    resize: none;
+    outline: none;
+    font-size: 2rem;
+}
+
+textarea::placeholder{
+    font-size: 2rem;
+    
+    
+
+}
+

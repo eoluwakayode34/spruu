@@ -1,0 +1,70 @@
+
+
+
+.red{
+
+    &:active, &:hover{
+        background: #EF261F;
+        color: white;
+    }
+}
+
+.orange{
+
+    &:active, &:hover{
+        background: #F5621D;
+        color: white;
+    }
+}
+
+.yellow{
+
+    &:active, &:hover{
+        background: #F3D71E;
+        color: white;
+    }
+}
+
+.lemon{
+
+    &:active, &:hover{
+        background: #A4F629;
+        color: white;
+    }
+}
+
+.green{
+
+    &:active, &:hover, &:focus{
+        background: #43C51D;
+        color: white;
+    }
+}
+
+
+.button{
+    border-radius: 5px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    padding: 1rem 3rem;
+    color: #747474;
+    background: #f3f3f3;
+    border: none; 
+    margin: 1rem;
+    cursor: pointer;
+    transition: background .2s ease-in;
+
+
+}
+
+.button-group{
+    display: flex;
+    margin: .5rem 0;
+}
+
+.rating-heading{
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-right: 2rem;
+}
