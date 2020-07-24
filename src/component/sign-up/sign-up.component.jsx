@@ -1,28 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import CustomButton from '../custom-button/custom-button.component';
 import EmailInput from "../email-input/email-input.component";
 import PasswordInput from "../password-input/password-input.component";
 
-const SignUp = () => {
+const SignUp = () => (
     
-    const [signUp, setSignUp] = useState({
-        email: '',
-        password: ''
-    })
-       
+  
+      
 
-
-
-
-
-
-
- 
-        return(
-
-            <div>
-
-           
+            <div>           
             <EmailInput placeholder='Email'  type="email" 
                 name='email' />
             <PasswordInput placeholder='Password' type="password" />
@@ -33,6 +19,6 @@ const SignUp = () => {
         )
     
 
-}
+
 
 export default SignUp;

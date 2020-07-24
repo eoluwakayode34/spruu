@@ -193,6 +193,32 @@
     }
 }
 
+.very-easy{
+    background: #43C51D;
+    color: white;
+}
+
+.easy{
+    background: #A4F629;
+    color: #000;
+}
+
+.neutral{
+    background: #F3D71E;
+    color: #000;
+}
+
+.difficult{
+    background: #F5621D;
+    color: #fff;
+}
+
+.very-difficult{
+    background: #EF261F;
+    color: #fff;
+}
+
+
 .level-box {
     display: flex;
     align-items: center;

@@ -7,6 +7,7 @@
 }
 
 
+
 .review-list-result-box{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -53,4 +54,63 @@
     text-align: justify;
 }
 
+
+.review-result-list-container{
+background: #f0f0f0;
+border-radius: 7px;
+padding: 1rem;
+margin: 2rem auto;
+align-content: center;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: space-evenly;
+}
+
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    flex-basis: auto;   
+    background: #fff;
+}
+
+.pd3{
+    padding: 1rem 4rem;
+}
+
+.mb-3{
+    margin-bottom: 2rem;
+}
+
+#bg-none{
+    background: none;
+}
+
+.br-5{
+    border-radius: 5px;
+}
+
+#align-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.user-review{
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    flex-basis: 100%;
+    padding: 2rem 1rem;
+    margin: 1rem 0 0;
+    border-radius: 5px;
+    font-style: italic;
+    text-align: center;
+
+}
 
