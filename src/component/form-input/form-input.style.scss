@@ -1,7 +1,8 @@
 $color-primary: #CA8831;
 
-.group{
+.form-group{
     margin: 2rem 0;
+    
 }
 
 input.form-input{
@@ -25,4 +26,12 @@ input.form-input::placeholder{
 
 input.form-input:focus{
     border-bottom: 2px solid $color-primary;
+}
+
+.has-error{
+    border: 2px solid crimson;  
+}
+
+.danger{
+    color: crimson;
 }

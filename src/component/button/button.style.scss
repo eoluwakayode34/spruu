@@ -43,7 +43,8 @@
 
 
 .button{
-    border-radius: 5px;
+    display: flex;
+    border-radius: 2px;
     font-size: 1.5rem;
     font-weight: 600;
     text-transform: capitalize;
@@ -53,14 +54,43 @@
     border: none; 
     margin: 1rem;
     cursor: pointer;
-    transition: background .2s ease-in;
+    transition: background .1s ease-in;
+
+    @media screen and (max-width: 50rem) {
+        font-size: 1.4rem;
+        padding: 1rem 2rem;
+
+    }
+
+    
+    @media screen and (max-width: 36rem) {
+        font-size: 1.3rem;
+        padding: 1rem 1.7rem;
+        margin: .5rem;
+
+    }
+
+     
+    @media screen and (max-width: 30rem) {
+        font-size: 1.3rem;
+        padding: 1rem 1.7rem;
+        margin: 0 .5rem;
+
+    }
 
 
 }
 
-.button-group{
+.form-group{
     display: flex;
-    margin: .5rem 0;
+    justify-content: center;
+    align-items: center;
+   
+    @media only screen and (max-width: 33rem){
+        flex-wrap: wrap;
+    }
+
+    
 }
 
 .rating-heading{
@@ -68,3 +98,56 @@
     font-weight: 400;
     margin-right: 2rem;
 }
+
+
+.form-radio{
+    &__input{
+        display: none;
+        background: red;
+        width: 4rem;
+    }
+
+    &__group{
+        margin: 1rem 0;
+        font-size: 1.5rem;
+
+        
+        @media only screen and (max-width: 50rem){
+            margin: .8rem 0;
+        }
+
+       
+
+        @media only screen and (max-width: 30rem){
+                margin: .4rem 0;
+        }
+    }
+
+}
+
+.form-radio__input:checked ~ .red{
+    background: #EF261F;
+    color: white;
+}
+
+.form-radio__input:checked ~ .orange{
+    background: #F5621D;
+    color: white;
+}
+
+.form-radio__input:checked ~ .yellow{
+    background: #F3D71E;
+    color: white;
+}
+
+.form-radio__input:checked ~ .lemon{
+    background: #A4F629;
+    color: white;
+}
+
+.form-radio__input:checked ~ .green{
+    background: #43C51D;
+    color: white;
+}
+
+

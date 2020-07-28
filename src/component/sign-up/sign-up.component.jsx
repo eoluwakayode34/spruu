@@ -1,39 +1,24 @@
 import React from 'react';
-import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
+import EmailInput from "../email-input/email-input.component";
+import PasswordInput from "../password-input/password-input.component";
 
-class SignUp extends React.Component {
-    constructor(){
-        super();
+const SignUp = () => (
+    
+  
+      
 
-        this.state={
-            email: '',
-            password: ''
-        }
-    }
-
-
-
-
-
-
-
-    render(){
-        return(
-
-            <div>
-
-           
-            <FormInput placeholder='Email'  type="email" 
+            <div>           
+            <EmailInput placeholder='Email'  type="email" 
                 name='email' />
-            <FormInput placeholder='Password' type="password" />
-            <FormInput placeholder='Confirm Password'  type="password"/>
+            <PasswordInput placeholder='Password' type="password" />
+            <PasswordInput   placeholder='Confirm Password'  type="password"/>
             <CustomButton>SIGN UP</CustomButton>
             </div>
         
         )
-    }
+    
 
-}
+
 
 export default SignUp;
