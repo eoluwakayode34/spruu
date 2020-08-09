@@ -90,7 +90,7 @@ class RateASchool extends React.Component {
         renderSuggestion={(suggestion) => {
           return (
             <Link
-            to={ `/lecturer-review-result/${suggestion._id}`}
+            to={ `/school-review-result/${suggestion._id}`}
             key={suggestion._id}
             >
                           <span>{suggestion.name}</span>

@@ -8,6 +8,7 @@ import schoolData from "../../data/data";
 import {  Link} from "react-router-dom";
 import axios from 'axios'
 
+
 const schoolDetails = schoolData.find((element) => element.title === "lecturer").schoolData
 const data = schoolDetails;
 
