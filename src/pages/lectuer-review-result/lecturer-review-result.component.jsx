@@ -18,8 +18,8 @@ const SchoolReviewResult = (props) => {
   const id = props.match.params.slug;
 
   useEffect(() => {
-    let _id = "5eb0ba69580e3d1d458a724b";
-    fetch(`http://13.244.78.114:4000/spruu/api/v1/user/lecturer/${_id}`)
+    // let _id = "5eb0ba69580e3d1d458a724b";
+    fetch(`http://13.244.78.114:4000/spruu/api/v1/user/lecturer/${id}`)
       .then((response) => response.json())
       .then((data) => {
         const result = data.data;
@@ -30,8 +30,8 @@ const SchoolReviewResult = (props) => {
   }, [id]);
 
   useEffect(() => {
-    let _id = "5eb0ba69580e3d1d458a724b";
-    fetch(`http://13.244.78.114:4000/spruu/api/v1/user/lecturer/review/${_id}`)
+    // let _id = "5eb0ba69580e3d1d458a724b";
+    fetch(`http://13.244.78.114:4000/spruu/api/v1/user/lecturer/review/${id}`)
       .then((response) => response.json())
       .then((data) => {
         const result = data.data;
@@ -66,7 +66,7 @@ const SchoolReviewResult = (props) => {
           </div>
           <Link
             exact
-            to={"/review/" + lecturerInfo.fullName}
+            to={"/review/" + id}
             className="review-btn"
           >
             REVIEW {lecturerInfo.fullName}
