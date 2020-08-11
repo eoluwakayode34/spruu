@@ -3,7 +3,6 @@ import FormContainer from "../../component/form-container/form-container.compoen
 import CustomButton from "../../component/custom-button/custom-button.component";
 import "./rate-a-school.style.scss";
 import Autosuggest from "react-autosuggest";
-import schoolData from "../../data/data";
 import { Link } from "react-router-dom";
 import axios from 'axios'
 
@@ -92,6 +91,7 @@ class RateASchool extends React.Component {
             <Link
             to={ `/school-review-result/${suggestion._id}`}
             key={suggestion._id}
+            className='suggestion-list'
             >
                           <span>{suggestion.name}</span>
                           <div>{suggestion.state},{suggestion.country}</div>

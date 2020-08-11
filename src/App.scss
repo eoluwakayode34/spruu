@@ -26,16 +26,16 @@ code {
 html {
   font-size: 64.5%;
 
-  
-  @media only screen and (max-width: 43rem){
+
+  @media only screen and (max-width: 43rem) {
     font-size: 55%;
   }
 
-  @media only screen and (max-width: 24rem){
+  @media only screen and (max-width: 24rem) {
     font-size: 45%;
-}
+  }
 
-  @media only screen and (max-width: 20rem){
+  @media only screen and (max-width: 20rem) {
     font-size: 40%;
   }
 
@@ -45,12 +45,12 @@ html {
 }
 
 
-a{
+a {
   text-decoration: none;
 }
 
 
-.container{
+.container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -58,8 +58,27 @@ a{
 
 $color-primary: #CA8831;
 
-h2{
+h2 {
   font-size: 3rem;
   font-weight: 400;
   margin-bottom: 4rem;
+}
+
+.suggestion-list {
+  color: darkgray;
+
+}
+
+.suggestion-list:active {
+  color: #CA8831;
+  font-weight: 400;
+  letter-spacing: 2px;
+
+}
+
+
+.suggestion-list:hover {
+  color: #333;
+  font-weight: bold;
+
 }

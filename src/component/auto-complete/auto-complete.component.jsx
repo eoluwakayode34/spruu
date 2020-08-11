@@ -90,6 +90,7 @@ class AutoComplete extends React.Component {
         suggestions={suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        className='suggestion-list'
         getSuggestionValue={function getSuggestionValue(suggestion) {
           return suggestion.name;
         }}
@@ -98,9 +99,12 @@ class AutoComplete extends React.Component {
             <Link
             to={ `/lecturer-review-result/${suggestion._id}`}
             key={suggestion._id}
+            className='suggestion-list'
+           
+
             >
-                          <span>{suggestion.fullName}</span>
-                          <div>{suggestion.institution}</div>
+                          <span className='suggestion-heading'>{suggestion.fullName}</span>
+                          <div className='sub-suggestion-heading'>{suggestion.institution}</div>
 
             </Link>
           );

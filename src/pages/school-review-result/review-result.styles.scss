@@ -58,11 +58,33 @@
 .review-image {
     width: 100%;
 
+    &-school-container{
+        width: 15rem;
+        height: 15rem;
+        background: url('../../asset/school.png');
+        background-color: rgb(246, 246, 246);
+        background-size: 70%;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin-right: 3rem;
+        border-radius: 10px;
+        overflow: hidden;
+
+        @media screen and (max-width: 45rem) {
+            border-radius: 50%;
+        }
+
+    }
+
 
     &-container {
         width: 15rem;
         height: 15rem;
-        background: #f3f3f3;
+        background: url('../../asset/avatar.png');
+        background-color: rgb(246, 246, 246);
+        background-size: 70%;
+        background-repeat: no-repeat;
+        background-position: center;
         margin-right: 3rem;
         border-radius: 10px;
         overflow: hidden;
