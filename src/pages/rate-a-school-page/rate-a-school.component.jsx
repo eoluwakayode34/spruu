@@ -3,7 +3,6 @@ import FormContainer from "../../component/form-container/form-container.compoen
 import CustomButton from "../../component/custom-button/custom-button.component";
 import "./rate-a-school.style.scss";
 import Autosuggest from "react-autosuggest";
-import schoolData from "../../data/data";
 import { Link } from "react-router-dom";
 import axios from 'axios'
 

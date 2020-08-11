@@ -9,92 +9,88 @@ import axios from "axios";
 
 const RateLecturer = (props) => {
   const [review, setReview] = useState({
-  lecturerid: props.match.params.slug,
-	classroomInteraction:"",
-	patience:"",
-	knowledgeOfMaterial:"",
-	organization:"",
-	communication:"",
-	authority:"",
-	compassion:"",
-	rapport:"",
-	difficulty:"",
-	takeAgain:"",
-	review:""
-  })
-
-    
+    lecturerid: props.match.params.slug,
+    classroomInteraction: "",
+    patience: "",
+    knowledgeOfMaterial: "",
+    organization: "",
+    communication: "",
+    authority: "",
+    compassion: "",
+    rapport: "",
+    difficulty: "",
+    takeAgain: "",
+    review: "",
+  });
 
   const handleChange = (field, value) => {
-    alert(field + ' ' + value)
-    setReview({...review, [field]: value})
+    setReview({ ...review, [field]: value });
 
-    if(
+    if (
       review.lecturerid === null ||
-      review.classroomInteraction === ""||
-	    review.patience === "" ||
-	    review.knowledgeOfMaterial === "" ||
-	    review.organization === "" ||
-	    review.communication === "" ||
-	    review.authority === "" ||
-	    review.compassion === "" ||
-	    review.rapport === "" ||
-	    review.difficulty === "" ||
-	    review.takeAgain === "" ||
-	    review.review === ""
-  ){
-    return true
-  }else{
-    setToggleDisabled(false)
-  }
-  }
-
+      review.classroomInteraction === "" ||
+      review.patience === "" ||
+      review.knowledgeOfMaterial === "" ||
+      review.organization === "" ||
+      review.communication === "" ||
+      review.authority === "" ||
+      review.compassion === "" ||
+      review.rapport === "" ||
+      review.difficulty === "" ||
+      review.takeAgain === "" ||
+      review.review === ""
+    ) {
+      return true;
+    } else {
+      setToggleDisabled(false);
+    }
+  };
 
   const handleReview = (e) => {
-    setReview({...review, review: e.target.value})
-    if(
+    setReview({ ...review, review: e.target.value });
+    if (
       review.lecturerid === null ||
-      review.classroomInteraction === ""||
-	    review.patience === "" ||
-	    review.knowledgeOfMaterial === "" ||
-	    review.organization === "" ||
-	    review.communication === "" ||
-	    review.authority === "" ||
-	    review.compassion === "" ||
-	    review.rapport === "" ||
-	    review.difficulty === "" ||
-	    review.takeAgain === "" ||
-	    review.review === ""
-  ){
-    return true
-  }else{
-    setToggleDisabled(false)
-  }
-  }
+      review.classroomInteraction === "" ||
+      review.patience === "" ||
+      review.knowledgeOfMaterial === "" ||
+      review.organization === "" ||
+      review.communication === "" ||
+      review.authority === "" ||
+      review.compassion === "" ||
+      review.rapport === "" ||
+      review.difficulty === "" ||
+      review.takeAgain === "" ||
+      review.review === ""
+    ) {
+      return true;
+    } else {
+      setToggleDisabled(false);
+    }
+  };
 
-  const  handletakeAgain = (e) => {
-    setReview({...review, takeAgain: e.target.value})
-    if(
+  const handletakeAgain = (e) => {
+    setReview({ ...review, takeAgain: e.target.value });
+    if (
       review.lecturerid === null ||
-      review.classroomInteraction === ""||
-	    review.patience === "" ||
-	    review.knowledgeOfMaterial === "" ||
-	    review.organization === "" ||
-	    review.communication === "" ||
-	    review.authority === "" ||
-	    review.compassion === "" ||
-	    review.rapport === "" ||
-	    review.difficulty === "" ||
-	    review.takeAgain === "" ||
-	    review.review === ""
-  ){
-    return true
-  }else{
-    setToggleDisabled(false)
-  }
-  }
+      review.classroomInteraction === "" ||
+      review.patience === "" ||
+      review.knowledgeOfMaterial === "" ||
+      review.organization === "" ||
+      review.communication === "" ||
+      review.authority === "" ||
+      review.compassion === "" ||
+      review.rapport === "" ||
+      review.difficulty === "" ||
+      review.takeAgain === "" ||
+      review.review === ""
+    ) {
+      return true;
+    } else {
+      setToggleDisabled(false);
+    }
+  };
 
-  const [lecturerName, setLecturerName] = useState(null)
+  const [lecturerName, setLecturerName] = useState(null);
   const id = props.match.params.slug;
 
   useEffect(() => {
@@ -107,40 +103,41 @@ const RateLecturer = (props) => {
       });
   }, [id]);
 
-  const [toggleDisabled, setToggleDisabled] = useState(true)
-    
+  const [toggleDisabled, setToggleDisabled] = useState(true);
 
-const [submited , setSubmited] = useState('not submitted')
-
+  const [submited, setSubmited] = useState("not submitted");
 
   const submitHandler = async (e) => {
-    e.preventDefault()
-    setSubmited('submitted')
+    e.preventDefault();
+    setSubmited("submitted");
 
     setReview({
       lecturerid: props.match.params.slug,
-    classroomInteraction:"",
-    patience:"",
-    knowledgeOfMaterial:"",
-    organization:"",
-    communication:"",
-    authority:"",
-    compassion:"",
-    rapport:"",
-    difficulty:"",
-    takeAgain:"",
-    review:""
-    })
-  
-  axios.post('http://13.244.78.114:4000/spruu/api/v1/user/lecturer/review', review)
-  .then((res) => {console.log(res.data)})
-  .catch(err => {console.log(err)})
+      classroomInteraction: "",
+      patience: "",
+      knowledgeOfMaterial: "",
+      organization: "",
+      communication: "",
+      authority: "",
+      compassion: "",
+      rapport: "",
+      difficulty: "",
+      takeAgain: "",
+      review: "",
+    });
 
-
-  
-  }
-  
- 
+    axios
+      .post(
+        "http://13.244.78.114:4000/spruu/api/v1/user/lecturer/review",
+        review
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div as="form" className="review-container">
@@ -155,76 +152,83 @@ const [submited , setSubmited] = useState('not submitted')
         <div className="rating-container">
           <div className="rating-box">
             <h4 className="rating-heading"> Classroom Interaction</h4>
-            <RatingButton 
-            name='classroomInteraction'
-            selected={review.classroomInteraction}
-            handleChange={handleChange} 
-              />
+            <RatingButton
+              name="classroomInteraction"
+              selected={review.classroomInteraction}
+              handleChange={handleChange}
+            />
           </div>
 
           <div className="rating-box">
             <h4 className="rating-heading"> Communication</h4>
-            <RatingButton 
-            name='communication'
-            selected={review.classroomInteraction}
-            handleChange={handleChange}   />
+            <RatingButton
+              name="communication"
+              selected={review.classroomInteraction}
+              handleChange={handleChange}
+            />
           </div>
 
           <div className="rating-box">
             <h4 className="rating-heading">Patience</h4>
-            <RatingButton 
-            name='patience'
-            selected={review.patience}
-            handleChange={handleChange}  />
+            <RatingButton
+              name="patience"
+              selected={review.patience}
+              handleChange={handleChange}
+            />
           </div>
 
           <div className="rating-box">
             <h4 className="rating-heading"> Knowledge of Medical</h4>
-            <RatingButton 
-            name='knowledgeOfMaterial'
-            selected={review.knowledgeOfMaterial}
-            handleChange={handleChange}  />
+            <RatingButton
+              name="knowledgeOfMaterial"
+              selected={review.knowledgeOfMaterial}
+              handleChange={handleChange}
+            />
           </div>
 
           <div className="rating-box">
-            <h4 className="rating-heading"
-            > Organization</h4>
-            <RatingButton 
-            name='organization'
-            selected={review.organization}
-            handleChange={handleChange}  />
+            <h4 className="rating-heading"> Organization</h4>
+            <RatingButton
+              name="organization"
+              selected={review.organization}
+              handleChange={handleChange}
+            />
           </div>
 
           <div className="rating-box">
             <h4 className="rating-heading"> Authority</h4>
-            <RatingButton 
-            name='authority'
-            selected={review.authority}
-            handleChange={handleChange}  />
+            <RatingButton
+              name="authority"
+              selected={review.authority}
+              handleChange={handleChange}
+            />
           </div>
 
           <div className="rating-box">
             <h4 className="rating-heading"> Compassion</h4>
-            <RatingButton 
-            name='compassion'
-            selected={review.compassion} 
-            handleChange={handleChange} />
+            <RatingButton
+              name="compassion"
+              selected={review.compassion}
+              handleChange={handleChange}
+            />
           </div>
 
           <div className="rating-box">
             <h4 className="rating-heading"> Rapport</h4>
             <RatingButton
-             name='rapport'
-             selected={review.rapport}
-             handleChange={handleChange}  />
+              name="rapport"
+              selected={review.rapport}
+              handleChange={handleChange}
+            />
           </div>
 
           <div className="rating-box">
             <h4 className="rating-heading"> Difficulty</h4>
-            <RatingButton 
-            name='difficulty' 
-            selected={review.difficulty}
-            handleChange={handleChange}/>
+            <RatingButton
+              name="difficulty"
+              selected={review.difficulty}
+              handleChange={handleChange}
+            />
           </div>
 
           <div className="rating-box">
@@ -237,10 +241,10 @@ const [submited , setSubmited] = useState('not submitted')
                   <label>
                     <input
                       type="radio"
-                      name='takeAgain'
+                      name="takeAgain"
                       className="form-radio__input"
                       value="true"
-                      onChange={handletakeAgain} 
+                      onChange={handletakeAgain}
                     />
                     <span className="button lemon w">YES</span>
                   </label>
@@ -251,10 +255,10 @@ const [submited , setSubmited] = useState('not submitted')
                   <label>
                     <input
                       type="radio"
-                      name='takeAgain'
+                      name="takeAgain"
                       className="form-radio__input"
                       value="false"
-                      onChange={handletakeAgain} 
+                      onChange={handletakeAgain}
                     />
                     <span className="button red w">NO</span>
                   </label>
@@ -265,9 +269,11 @@ const [submited , setSubmited] = useState('not submitted')
 
           <div className="rating-box">
             <h4 className="rating-heading">Review</h4>
-            <textarea placeholder="write your review"
-            name={review.review}
-            onChange={handleReview} ></textarea>
+            <textarea
+              placeholder="write your review"
+              name={review.review}
+              onChange={handleReview}
+            ></textarea>
           </div>
         </div>
 
@@ -306,11 +312,17 @@ const [submited , setSubmited] = useState('not submitted')
           </div>
         </div>
 
-        <CustomButton type="submit" onClick={submitHandler} disabled={toggleDisabled}>SUBMIT</CustomButton>
+        <CustomButton
+          type="submit"
+          onClick={submitHandler}
+          disabled={toggleDisabled}
+        >
+          SUBMIT
+        </CustomButton>
         <Link to="/review" className="cancelBtn">
           CANCEL
         </Link>
-        <div>Your form is: {submited}</div>
+        {/* <div>Your form is: {submited}</div> */}
       </form>
     </div>
   );

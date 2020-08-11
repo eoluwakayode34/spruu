@@ -14,8 +14,6 @@ const RatingButton = (props) => {
                     name: e.target.name})
 
 
-        alert(fieldName + fieldValue);
-
         props.handleChange(fieldName, fieldValue)
     }
 
