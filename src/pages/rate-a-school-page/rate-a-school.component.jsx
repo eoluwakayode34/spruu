@@ -92,6 +92,7 @@ class RateASchool extends React.Component {
             <Link
             to={ `/school-review-result/${suggestion._id}`}
             key={suggestion._id}
+            className='suggestion-list'
             >
                           <span>{suggestion.name}</span>
                           <div>{suggestion.state},{suggestion.country}</div>

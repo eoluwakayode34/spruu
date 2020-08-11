@@ -11,6 +11,8 @@ import {
   takeAgain,
 } from "../../component/select-dropdown-data/select-dropdown.component";
 
+import {ReactComponent as Gender} from '../../asset/gender.png'
+
 const SchoolReviewResult = (props) => {
   const [viewData, setViewData] = useState(null);
   const [lecturerInfo, setLecturerInfo] = useState(null);
@@ -50,7 +52,7 @@ const SchoolReviewResult = (props) => {
     <div className="review-result-container">
       <div className="review-person-box">
         <div className="review-image-container">
-          <img src={viewData.imgUrl} alt="" className="review-image" />
+          <img src={Gender} alt="" className="review-image" />
         </div>
         <div className="name-and-attr">
           <h3 className="result-name">{lecturerInfo.fullName}</h3>

@@ -113,6 +113,7 @@ class RateALecturer extends React.Component {
             <Link
             to={ `/lecturer-review-result/${suggestion._id}`}
             key={suggestion._id}
+            className='suggestion-list'
             >
                           <span>{suggestion.fullName}</span>
                           <div>{suggestion.institution}</div>
