@@ -1,11 +1,29 @@
-import React from 'react';
-import './form-input.style.scss';
+import React from "react";
+import "./form-input.style.scss";
 
-const FormInput = ({handleChange, label, ...OtherProps }) => (
-    <div className="group">
-        <input type="text" className='form-input' onChange={handleChange} {...OtherProps} />
+const FormInput = (props) => {
+  let wrapper = "group";
+  if (props.error.length > 0) {
+    wrapper += " has-error";
+  }
+
+  return (
+    <div className={wrapper}>
+      <input
+        type={props.type}
+        value={props.value}
+        name={props.name}
+        className="form-input"
+        onChange={props.handleChange}
+        placeholder={props.placeholder}
+      />
+      
     </div>
-
-)
+  );
+};
 
 export default FormInput;
+
+FormInput.defaultProps = {
+  error: "",
+};

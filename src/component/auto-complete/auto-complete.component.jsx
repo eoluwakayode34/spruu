@@ -1,72 +1,119 @@
-import React from 'react';
-import './auto-complete.style.scss';
-
-export default class AutoComplete extends React.Component{
-    constructor(props){
-        super(props);
-
-
-        
-            this.items = [
-                'Henry',
-                 'Olagundoye Emmanuel',
-                 'Meyer',
-                 'David Oghi',
-                 'Abraham',
-                 'Daniel',
-                 'David',
-                 'Dodo',
-                 'Dosumu'
+import React from "react";
+import Autosuggest from "react-autosuggest";
+import "./auto-complete.style.scss";
+import { Link } from "react-router-dom";
+import axios from 'axios'
 
 
-            ]
 
-            this.state={
-                suggestions: [],
-                text: ''
-            }
-        }
-        
-            onTextChange = (e) => {
-                const value = e.target.value;
-                let suggestions = [];
 
-                if(value.length > 0 ){
-                    const regex = new RegExp(`^${value}`, 'i');
-                     suggestions = this.items.sort().filter(v => regex.test(v));                                       
-                }
-                this.setState(() => ({suggestions, text:value }))
-            }
+class AutoComplete extends React.Component {
+  constructor() {
+    super();
 
-            suggestionSelected (value){
-                this.setState(() => ({
-                    text:value,
-                    suggestions: []
-                }))
-            }
+    this.state = {
+      value: '',
+      suggestions: [],
+      isLoaded: false
+    };    
+  }
 
-            renderSuggestion(){
-                 const{suggestions} = this.state;
+  onChange = (event, { newValue, method }) => {
+    this.setState({
+      value: newValue
+    });
+  };
+  
+  onSuggestionsFetchRequested = ({ value }) => {
 
-                 if(suggestions.length === 0 ){
-                     return null;
-                 }
-                 return(
-                    <ul>
-                    { suggestions.map( (item) => <li onClick={() => this.suggestionSelected(item)} className='suggestion'>{item}</li>  ) }
-                            </ul>
-                 )
-            }
+      const escapedValue = value.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      
+      if (escapedValue === '') {
+        this.setState({
+          suggestions: []
+        });
+      }
     
-
+      
+      const regex = new RegExp('^' + escapedValue, 'i');
     
+      try{
+        axios('http://13.244.78.114:4000/spruu/api/v1/user/lecturers')
+               
+        .then(users => {
+          const lecturer = users.data.data.filter(name => regex.test(name.fullName))
+          console.log(lecturer) 
+          this.setState({
+            suggestions: lecturer,
+            isLoaded: true
+          });
+        
+        })
+       
+    console.log(this.state)
+      
+      }catch(e){
+        this.setState({
+          suggestions: []
+        });
+      }}
+     
+      
 
-    render(){
-        const {text} = this.state;
-        return(
-            <div className='autocomplete' >
-                <input value={text} type='text' className='search' onChange={this.onTextChange} placeholder='Search for lecturer or school' />
-                {this.renderSuggestion()}
-            </div>
-        )
-    }}
+  onSuggestionsClearRequested = () => {
+    this.setState({
+      suggestions: []
+    });
+  };
+
+ 
+
+  render() {
+    const { value, suggestions, isLoaded} = this.state;
+
+
+    const inputProps = {
+      placeholder: "Type name of Lecturer" ,
+      value,
+      onChange: this.onChange
+    };
+
+
+
+
+
+
+
+    return (
+      <Autosuggest 
+        isLoaded={isLoaded}
+        suggestions={suggestions}
+        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        className='suggestion-list'
+        getSuggestionValue={function getSuggestionValue(suggestion) {
+          return suggestion.name;
+        }}
+        renderSuggestion={(suggestion) => {
+          return (
+            <Link
+            to={ `/lecturer-review-result/${suggestion._id}`}
+            key={suggestion._id}
+            className='suggestion-list'
+           
+
+            >
+                          <span className='suggestion-heading'>{suggestion.fullName}</span>
+                          <div className='sub-suggestion-heading'>{suggestion.institution}</div>
+
+            </Link>
+          );
+        }}
+        inputProps={inputProps} />
+    );
+  }
+}
+
+
+
+export default AutoComplete;

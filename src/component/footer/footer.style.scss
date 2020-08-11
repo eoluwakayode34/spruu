@@ -1,28 +1,46 @@
-
 $color-primary: #CA8831;
-.footer{  
+
+.footer {
     color: $color-primary;
     display: flex;
     align-items: center;
     border-top: 1px solid $color-primary;
-   max-height: 8rem;
- 
-    
-    &-container{
+    height: 10rem;
+   
+
+
+
+    &-container {
         display: flex;
-        justify-content: space-between ;
+        justify-content: space-between;
         align-items: center;
+        font-size: 1.5rem;
+        height: 8rem;
+
+        @media only screen and (max-width: 803px) {
+            flex-direction: column;
+            text-align: center  ;
+        }
+
+        & > * {
+            @media only screen and (max-width: 803px) {
+                padding: 1rem 0;
+            }
+        }
+        
     }
 }
-.social-link-item-icon{
 
- 
+.social-link-item-icon {
+
+
     margin: 0;
     height: 1.7rem;
 
 
 }
-.social-link-item:not(:last-child){
+
+.social-link-item:not(:last-child) {
     margin-right: 2rem;
 
 }

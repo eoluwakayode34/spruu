@@ -1,66 +1,76 @@
-import React from 'react';
-import FormInput from '../form-input/form-input.component';
-import CustomButton from '../custom-button/custom-button.component';
-import './sign-in.style.scss';
+import React, { useState } from "react";
+import PasswordInput from "../password-input/password-input.component";
+import EmailInput from "../email-input/email-input.component";
+import CustomButton from "../custom-button/custom-button.component";
+import "./sign-in.style.scss";
 
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-class SignIn extends React.Component {
-    constructor(){
-        super();
+const SignIn = (props) => {
+  const [errors, setErrors] = useState({
+      email: "",
+      password: ""
+  });
 
-        this.state = {
-            email: '',
-            password: ''
-        }
-    }
+  const [login, setLogin] = useState({
+    email: "",
+    password: "",
+  });
 
-    handleSubmit = event => {
-        event.preventDefault();
+  function formIsValid() {
+    const _errors = {};
 
-        this.setState({email: '', password: ''})
-    }
+    if (!login.email) _errors.email = "Email is required";
+    if (!login.password) _errors.password = "Password is required";
 
-    handleChange = event => {
-        const {value, name} = event.target;
-        this.setState({[name]: value })
-    }
+    setErrors(_errors);
 
-    render(){
-        return(
-            <div className="sign-in">
-           
-            <form action="" onSubmit={this.handleSubmit}>
-                <FormInput 
-                type="email" 
-                name='email' 
-                onChange={this.handleChange}
-                value={this.state.email} 
-                placeholder='Email'
-                required/>
-            
-                <FormInput type="password"
-                 name='password' 
-                 placeholder='Password'
+    return Object.keys(_errors).length === 0;
+  }
 
-                 value={this.state.password}
-                onChange={this.handleChange}
-                required/>
+  function handleSubmit(event) {
+    if (!formIsValid()) return;
+    event.preventDefault();
+  }
 
-            <CustomButton type='submit' > SIGN IN </CustomButton>
-            </form>
+  function handleChange({ target }) {
+    setLogin({ ...login, [target.name]: target.value });
+  }
 
-            <div className="forget-password">
-                <div className='b-r flex-1 mt' > Forget my Password? </div>
-                <div className='flex-1 mt' >  Don’t have an account?
-                    <Link href='#signUp' className='sign-up-link' >Sign Up</Link>
-                </div>
-            </div>
+  return (
+    <div className="sign-in">
+      <form onSubmit={handleSubmit} >
+        <EmailInput
+          errors={errors}
+          name="email"
+          onChange={handleChange}
+          value={login.email}
+          placeholder="Email"
+        />
 
+        <PasswordInput
+          errors={errors}
+          name="password"
+          placeholder="Password"
+          value={login.password}
+          onChange={handleChange}
+        />
 
-            </div>
-        )
-    }
-}
+        <CustomButton type="submit" name='submit'> SIGN IN </CustomButton>
+      </form>
+
+      <div className="forget-password">
+        <div className="b-r flex-1 mt"> Forget my Password? </div>
+        <div className="flex-1 mt no-account">
+          {" "}
+          Don’t have an account?
+          <Link to="/signup" className="sign-up-link">
+            Sign Up
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default SignIn;

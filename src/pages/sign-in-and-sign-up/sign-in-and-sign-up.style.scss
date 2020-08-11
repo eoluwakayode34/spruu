@@ -1,9 +1,16 @@
 .sign-in-and-sign-up{
-    height: 76vh;
+    height: 100vh;
     background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin:  -1rem  auto 6rem auto;
+
+
+    @media only screen and (max-width: 50rem){
+        height: 110vh;
+        width: 100%;
+    }
 }
 
 .sign-container{
