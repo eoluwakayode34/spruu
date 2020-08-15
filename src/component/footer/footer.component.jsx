@@ -19,13 +19,13 @@ const Footer = () => (
             </div>
 
             <div className="social-link">
-           <a href="https://twitter.com/SpruuReview"  className='social-link-item' target="_blank" >
+           <a href="https://twitter.com/SpruuReview" rel="noopener noreferrer"  className='social-link-item' target="_blank" >
                <Twitter  className='social-link-item-icon' />
            </a>
-           <a href="https://www.facebook.com/SpruuReview/" className='social-link-item' target="_blank">
+           <a href="https://www.facebook.com/SpruuReview/"rel="noopener noreferrer" className='social-link-item' target="_blank">
              <Facebook  className='social-link-item-icon' />
            </a>
-           <a href="https://www.instagram.com/spruureview/" className='social-link-item'target="_blank" >
+           <a href="https://www.instagram.com/spruureview/" rel="noopener noreferrer" className='social-link-item'target="_blank" >
            <Instagram className='social-link-item-icon'  />
            </a>
            </div>

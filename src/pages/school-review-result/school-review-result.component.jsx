@@ -3,15 +3,15 @@ import "./review-result.styles.scss";
 import { Link } from "react-router-dom";
 import StarRatings from "../../component/star-ratings/star-ratings.component";
 import ProgressBar from "../../component/progress-bar/progress-bar.component";
-import Filter from '../../component/filter/filter.component'
-import ReviewList from '../../component/review-list/review-list.component';
-import Select from "react-select";
-import {
-  overalRating,
-  Date,
-  Difficulty,
-  takeAgain,
-} from "../../component/select-dropdown-data/select-dropdown.component";
+import Filter from "../../component/filter/filter.component";
+// import ReviewList from '../../component/review-list/review-list.component';
+// import Select from "react-select";
+// import {
+//   overalRating,
+//   Date,
+//   Difficulty,
+//   takeAgain,
+// } from "../../component/select-dropdown-data/select-dropdown.component";
 
 // suggestions={suggestions}
 // onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -42,7 +42,9 @@ const SchoolReviewResult = (props) => {
 
   useEffect(() => {
     // let _id = "5eb0ba69580e3d1d458a724b";
-    fetch(`http://13.244.78.114:4000/spruu/api/v1/user/institution/review/${id}`)
+    fetch(
+      `http://13.244.78.114:4000/spruu/api/v1/user/institution/review/${id}`
+    )
       .then((response) => response.json())
       .then((data) => {
         const result = data.data;
@@ -57,6 +59,18 @@ const SchoolReviewResult = (props) => {
   //   return sDate;
   // }
 
+  const displayDate = (datetime) => {
+    if (
+      new Intl.DateTimeFormat("en-US").format(new Date()) ===
+      new Intl.DateTimeFormat("en-US").format(new Date(datetime))
+    )
+      return new Intl.DateTimeFormat("en-US", {
+        year: "2-digit",
+        month: "2-digit",
+        day: "2-digit",
+      }).format(new Date(datetime));
+  };
+
   return viewData ? (
     <div className="review-result-container">
       <div className="review-person-box">
@@ -65,7 +79,9 @@ const SchoolReviewResult = (props) => {
         </div>
         <div className="name-and-attr">
           <h3 className="result-name">{schoolInfo.name}</h3>
-          <h4 className="result-description">{schoolInfo.state +','+ schoolInfo.country}</h4>
+          <h4 className="result-description">
+            {schoolInfo.state + "," + schoolInfo.country}
+          </h4>
           <div className="overall-s-r-b">
             <p className="text-medium">Overall Quality </p>
             <StarRatings
@@ -75,11 +91,7 @@ const SchoolReviewResult = (props) => {
               starRatedColor="#CA8831"
             />
           </div>
-          <Link
-            exact
-            to={"/school-review/" + id}
-            className="review-btn"
-          >
+          <Link exact to={"/school-review/" + id} className="review-btn">
             REVIEW {schoolInfo.name}
           </Link>
         </div>
@@ -89,9 +101,7 @@ const SchoolReviewResult = (props) => {
       <div className="review-category-box">
         <div className="rating-category">
           <div className="rating-category-item">
-            <div className="rating-category-item-text">
-            Career Prospects
-            </div>
+            <div className="rating-category-item-text">Career Prospects</div>
             <StarRatings
               rating={schoolInfo.careerProspect}
               starDimension="1.3rem"
@@ -111,7 +121,9 @@ const SchoolReviewResult = (props) => {
           </div>
 
           <div className="rating-category-item">
-            <div className="rating-category-item-text">Extracurricular Activities</div>
+            <div className="rating-category-item-text">
+              Extracurricular Activities
+            </div>
             <StarRatings
               rating={schoolInfo.extraCurricularActivities}
               starDimension="1.3rem"
@@ -143,7 +155,9 @@ const SchoolReviewResult = (props) => {
           </div>
 
           <div className="rating-category-item">
-            <div className="rating-category-item-text">Learning Environment</div>
+            <div className="rating-category-item-text">
+              Learning Environment
+            </div>
             <StarRatings
               rating={schoolInfo.learningEnvironment}
               starDimension="1.3rem"
@@ -153,7 +167,9 @@ const SchoolReviewResult = (props) => {
           </div>
 
           <div className="rating-category-item">
-            <div className="rating-category-item-text">Learning and materials</div>
+            <div className="rating-category-item-text">
+              Learning and materials
+            </div>
             <StarRatings
               rating={schoolInfo.learningEnvironment}
               starDimension="1.3rem"
@@ -163,7 +179,9 @@ const SchoolReviewResult = (props) => {
           </div>
 
           <div className="rating-category-item">
-            <div className="rating-category-item-text">Personal Development</div>
+            <div className="rating-category-item-text">
+              Personal Development
+            </div>
             <StarRatings
               rating={schoolInfo.personalDevelopment}
               starDimension="1.3rem"
@@ -178,50 +196,85 @@ const SchoolReviewResult = (props) => {
           <div className="distribution-progress">
             <div className="distribution-progress-text">5 Star</div>
             <ProgressBar
-              percentage={viewData.reviewDistribution.fiveStar ? Math.floor(viewData.reviewDistribution.fiveStar) : 0}
+              percentage={
+                viewData.reviewDistribution.fiveStar
+                  ? Math.floor(viewData.reviewDistribution.fiveStar)
+                  : 0
+              }
             />
             <div className="distribution-progress__percentage">
-              {viewData.reviewDistribution.fiveStar ? Math.floor(viewData.reviewDistribution.fiveStar) : 0}%
+              {viewData.reviewDistribution.fiveStar
+                ? Math.floor(viewData.reviewDistribution.fiveStar)
+                : 0}
+              %
             </div>
           </div>
 
           <div className="distribution-progress">
             <div className="distribution-progress-text">4 Star</div>
             <ProgressBar
-              percentage={viewData.reviewDistribution.fourStar ? Math.floor(viewData.reviewDistribution.fourStar) : 0}
+              percentage={
+                viewData.reviewDistribution.fourStar
+                  ? Math.floor(viewData.reviewDistribution.fourStar)
+                  : 0
+              }
             />
             <div className="distribution-progress__percentage">
-              {viewData.reviewDistribution.fourStar ? Math.floor(viewData.reviewDistribution.fourStar): 0}%
+              {viewData.reviewDistribution.fourStar
+                ? Math.floor(viewData.reviewDistribution.fourStar)
+                : 0}
+              %
             </div>
           </div>
 
           <div className="distribution-progress">
             <div className="distribution-progress-text">3 Star</div>
             <ProgressBar
-              percentage={viewData.reviewDistribution.threeStar ? Math.floor(viewData.reviewDistribution.threeStar) : 0}
+              percentage={
+                viewData.reviewDistribution.threeStar
+                  ? Math.floor(viewData.reviewDistribution.threeStar)
+                  : 0
+              }
             />
             <div className="distribution-progress__percentage">
-              {viewData.reviewDistribution.threeStar ? Math.floor(viewData.reviewDistribution.threeStar) : 0}%
+              {viewData.reviewDistribution.threeStar
+                ? Math.floor(viewData.reviewDistribution.threeStar)
+                : 0}
+              %
             </div>
           </div>
 
           <div className="distribution-progress">
             <div className="distribution-progress-text">2 Star</div>
             <ProgressBar
-              percentage={viewData.reviewDistribution.twoStar ? Math.floor(viewData.reviewDistribution.twoStar) : 0}
+              percentage={
+                viewData.reviewDistribution.twoStar
+                  ? Math.floor(viewData.reviewDistribution.twoStar)
+                  : 0
+              }
             />
             <div className="distribution-progress__percentage">
-              {viewData.reviewDistribution.twoStar ? Math.floor(viewData.reviewDistribution.twoStar) : 0}%
+              {viewData.reviewDistribution.twoStar
+                ? Math.floor(viewData.reviewDistribution.twoStar)
+                : 0}
+              %
             </div>
           </div>
 
           <div className="distribution-progress">
             <div className="distribution-progress-text">1 Star</div>
             <ProgressBar
-              percentage={viewData.reviewDistribution.oneStar ? Math.floor(viewData.reviewDistribution.oneStar) : 0}
+              percentage={
+                viewData.reviewDistribution.oneStar
+                  ? Math.floor(viewData.reviewDistribution.oneStar)
+                  : 0
+              }
             />
             <div className="distribution-progress__percentage">
-              {viewData.reviewDistribution.oneStar ? Math.floor(viewData.reviewDistribution.oneStar): 0}%
+              {viewData.reviewDistribution.oneStar
+                ? Math.floor(viewData.reviewDistribution.oneStar)
+                : 0}
+              %
             </div>
           </div>
         </div>
@@ -281,7 +334,10 @@ const SchoolReviewResult = (props) => {
 
         <div className="would-take-again">
           <h3 className="would-take-again-per">
-            {Math.floor(viewData.reviewDistribution.schoolAgain)}%
+            {viewData.reviewDistribution.schoolAgain
+              ? Math.floor(viewData.reviewDistribution.schoolAgain)
+              : 0}
+            %
           </h3>
           <p>
             {" "}
@@ -293,7 +349,7 @@ const SchoolReviewResult = (props) => {
 
       <div className="review-bar"> {viewData.totalReviews} Review </div>
 
-      <div>
+      {/* <div>
         <Select
           defaultValue={overalRating[0]}
           label="Single select"
@@ -353,35 +409,12 @@ const SchoolReviewResult = (props) => {
             },
           })}
         />
-      </div>
+      </div> */}
 
-     { viewData.review.map( review => <div className="review-result-list-container ">
-        <div className="flex mb-3 br-5">
-          <div className="rating-category-item-text pd3">  <StarRatings
-                rating={review.classroomInteraction}
-                starDimension="1.3rem"
-                starSpacing=".2rem"
-                starRatedColor="#CA8831"
-              /></div>
-        <div className="rating-category-item-text pd3">
-          {/* { reviewDate(review.createdAt) } */}
-                    {review.createdAt}
-
-          </div>
-          <div className="rating-category-item-text pd3">{
-          'Very Difficulty'
-          }</div>
-          <div className="rating-category-item-text pd3">{review.takeAgain ? 'Yes' : 'No'}</div>
-        </div>
-        <div className="review-category-box">
-          <div className="rating-distribution" id='align-center'>
-            <h4 className="rating-distribution-header" >STUDENT A</h4>
-          </div>
-          <div className="rating-category" id="bg-none">
-            <div className="rating-category-item">
-              <div className="rating-category-item-text">
-                Classroom Interaction
-              </div>
+      {viewData.review.map((review, index) => (
+        <div className="review-result-list-container " key={index}>
+          <div className="flex mb-3 br-5">
+            <div className="rating-category-item-text pd3">
               <StarRatings
                 rating={review.classroomInteraction}
                 starDimension="1.3rem"
@@ -389,84 +422,122 @@ const SchoolReviewResult = (props) => {
                 starRatedColor="#CA8831"
               />
             </div>
-
-            <div className="rating-category-item">
-              <div className="rating-category-item-text">Patience</div>
-              <StarRatings
-                rating={review.patience}
-                starDimension="1.3rem"
-                starSpacing=".2rem"
-                starRatedColor="#CA8831"
-              />
+            <div className="rating-category-item-text pd3">
+              {/* { reviewDate(review.createdAt) } */}
+              {displayDate(review.createdAt)}
             </div>
-
-            <div className="rating-category-item">
-              <div className="rating-category-item-text">Communication</div>
-              <StarRatings
-                rating={review.communication}
-                starDimension="1.3rem"
-                starSpacing=".2rem"
-                starRatedColor="#CA8831"
-              />
+            <div className="rating-category-item-text pd3">
+              {"Very Difficulty"}
             </div>
-
-            <div className="rating-category-item">
-              <div className="rating-category-item-text">
-                Knowledge of Material
+            <div className="rating-category-item-text pd3">
+              {review.takeAgain ? "Yes" : "No"}
+            </div>
+          </div>
+          <div className="review-category-box">
+            <div className="rating-distribution" id="align-center">
+              <h4 className="rating-distribution-header">
+                STUDENT {index + 1}
+              </h4>
+            </div>
+            <div className="rating-category" id="bg-none">
+              <div className="rating-category-item">
+                <div className="rating-category-item-text">
+                  Career Prospects
+                </div>
+                <StarRatings
+                  rating={review.careerProspect}
+                  starDimension="1.3rem"
+                  starSpacing=".2rem"
+                  starRatedColor="#CA8831"
+                />
               </div>
-              <StarRatings
-                rating={review.knowledgeOfMaterial}
-                starDimension="1.3rem"
-                starSpacing=".2rem"
-                starRatedColor="#CA8831"
-              />
-            </div>
 
-            <div className="rating-category-item">
-              <div className="rating-category-item-text">Organization</div>
-              <StarRatings
-                rating={review.organization}
-                starDimension="1.3rem"
-                starSpacing=".2rem"
-                starRatedColor="#CA8831"
-              />
-            </div>
+              <div className="rating-category-item">
+                <div className="rating-category-item-text">Food and Health</div>
+                <StarRatings
+                  rating={review.foodAndHealth}
+                  starDimension="1.3rem"
+                  starSpacing=".2rem"
+                  starRatedColor="#CA8831"
+                />
+              </div>
 
-            <div className="rating-category-item">
-              <div className="rating-category-item-text">Compassion</div>
-              <StarRatings
-                rating={review.compassion}
-                starDimension="1.3rem"
-                starSpacing=".2rem"
-                starRatedColor="#CA8831"
-              />
-            </div>
+              <div className="rating-category-item">
+                <div className="rating-category-item-text">
+                  Extracurricular Activities
+                </div>
+                <StarRatings
+                  rating={review.extraCurricularActivities}
+                  starDimension="1.3rem"
+                  starSpacing=".2rem"
+                  starRatedColor="#CA8831"
+                />
+              </div>
 
-            <div className="rating-category-item">
-              <div className="rating-category-item-text">Authority</div>
-              <StarRatings
-                rating={review.authority}
-                starDimension="1.3rem"
-                starSpacing=".2rem"
-                starRatedColor="#CA8831"
-              />
-            </div>
+              <div className="rating-category-item">
+                <div className="rating-category-item-text">
+                  Behaviour and Morals
+                </div>
+                <StarRatings
+                  rating={review.behaviourAndMorals}
+                  starDimension="1.3rem"
+                  starSpacing=".2rem"
+                  starRatedColor="#CA8831"
+                />
+              </div>
 
-            <div className="rating-category-item">
-              <div className="rating-category-item-text">Rapport</div>
-              <StarRatings
-                rating={review.rapport}
-                starDimension="1.3rem"
-                starSpacing=".2rem"
-                starRatedColor="#CA8831"
-              />
-            </div>
-            
-          </div>  
+              <div className="rating-category-item">
+                <div className="rating-category-item-text">
+                  Safety and Location
+                </div>
+                <StarRatings
+                  rating={review.safetyAndLocation}
+                  starDimension="1.3rem"
+                  starSpacing=".2rem"
+                  starRatedColor="#CA8831"
+                />
+              </div>
 
+              <div className="rating-category-item">
+                <div className="rating-category-item-text">
+                  Learning Environment
+                </div>
+                <StarRatings
+                  rating={review.learningEnvironment}
+                  starDimension="1.3rem"
+                  starSpacing=".2rem"
+                  starRatedColor="#CA8831"
+                />
+              </div>
+
+              <div className="rating-category-item">
+                <div className="rating-category-item-text">
+                  Learning and materials
+                </div>
+                <StarRatings
+                  rating={review.learningAndMaterials}
+                  starDimension="1.3rem"
+                  starSpacing=".2rem"
+                  starRatedColor="#CA8831"
+                />
+              </div>
+
+              <div className="rating-category-item">
+                <div className="rating-category-item-text">
+                  Personal Development
+                </div>
+                <StarRatings
+                  rating={review.personalDevelopment}
+                  starDimension="1.3rem"
+                  starSpacing=".2rem"
+                  starRatedColor="#CA8831"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="user-review"> {"Review:" + " " + review.review}</div>
         </div>
-        <div className='user-review'> { 'Review:'  + ' ' + review.review}</div>
-      </div>)}
+      ))}
     </div>
   ) : null;
 };

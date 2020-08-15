@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import RatingButton from "../../component/button/button.component";
 import FormInput from "../../component/form-input/form-input.component";
 import CustomButton from "../../component/custom-button/custom-button.component";
-import { Link } from "react-router-dom";
+import { Link, Redirect} from "react-router-dom";
 import "../rate-school/rate-school.styles.scss";
 import axios from "axios";
 
@@ -104,29 +104,15 @@ const RateLecturer = (props) => {
   }, [id]);
 
   const [toggleDisabled, setToggleDisabled] = useState(true);
+  const [fireRedirect, setFireRedirect] = useState(false)
 
-  const [submited, setSubmited] = useState("not submitted");
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    setSubmited("submitted");
+    setFireRedirect(true)
+    alert('Review Submitted')
 
-    setReview({
-      lecturerid: props.match.params.slug,
-      classroomInteraction: "",
-      patience: "",
-      knowledgeOfMaterial: "",
-      organization: "",
-      communication: "",
-      authority: "",
-      compassion: "",
-      rapport: "",
-      difficulty: "",
-      takeAgain: "",
-      review: "",
-    });
-
-    axios
+     axios
       .post(
         "http://13.244.78.114:4000/spruu/api/v1/user/lecturer/review",
         review
@@ -137,7 +123,25 @@ const RateLecturer = (props) => {
       .catch((err) => {
         console.log(err);
       });
+
+      setReview({
+        lecturerid: props.match.params.slug,
+        classroomInteraction: "",
+        patience: "",
+        knowledgeOfMaterial: "",
+        organization: "",
+        communication: "",
+        authority: "",
+        compassion: "",
+        rapport: "",
+        difficulty: "",
+        takeAgain: "",
+        review: "",
+      });
   };
+
+  const { from } = props.location.fireRedirect || '/'
+
 
   return (
     <div as="form" className="review-container">
@@ -311,18 +315,22 @@ const RateLecturer = (props) => {
             </label>
           </div>
         </div>
-
+        <div>Hello</div>
+        {toggleDisabled ? "You must fill all section to submit the form" : ''}
         <CustomButton
           type="submit"
           onClick={submitHandler}
           disabled={toggleDisabled}
+          
         >
-          SUBMIT
+          {toggleDisabled ? 'Fill all to Submit' : 'Submit Now'}
         </CustomButton>
         <Link to="/review" className="cancelBtn">
           CANCEL
         </Link>
-        {/* <div>Your form is: {submited}</div> */}
+
+        {fireRedirect && (
+                <Redirect to={from || `/find-a-lecturer`}/>)}
       </form>
     </div>
   );

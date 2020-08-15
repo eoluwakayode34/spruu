@@ -96,6 +96,8 @@ class AutoComplete extends React.Component {
         }}
         renderSuggestion={(suggestion) => {
           return (
+
+
             <Link
             to={ `/lecturer-review-result/${suggestion._id}`}
             key={suggestion._id}
@@ -103,7 +105,8 @@ class AutoComplete extends React.Component {
            
 
             >
-                          <span className='suggestion-heading'>{suggestion.fullName}</span>
+              
+                              <span className='suggestion-heading'>{suggestion.fullName}</span>
                           <div className='sub-suggestion-heading'>{suggestion.institution}</div>
 
             </Link>

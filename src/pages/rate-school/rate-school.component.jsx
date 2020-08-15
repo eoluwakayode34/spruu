@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import RatingButton from "../../component/button/button.component";
 import FormInput from "../../component/form-input/form-input.component";
 import CustomButton from "../../component/custom-button/custom-button.component";
-import { Link } from "react-router-dom";
+import { Link, Redirect} from "react-router-dom";
 import axios from 'axios';
 
 import "./rate-school.styles.scss";
@@ -35,11 +35,13 @@ const RateSchool = (props) => {
     schoolAgain:"",
     review:""
     })
+
+    const [fireRedirect, setFireRedirect] = useState(false)
+
   
       
   
     const handleChange = (field, value) => {
-      alert(field + ' ' + value)
       setReview({...review, [field]: value})
   
       if(
@@ -111,50 +113,52 @@ const RateSchool = (props) => {
     const id = props.match.params.slug;
   
     useEffect(() => {
-      fetch(`http://13.244.78.114:4000//spruu/api/v1/user/institution/review/${id}`)
+      fetch(`http://13.244.78.114:4000/spruu/api/v1/user/institution/${id}`)
         .then((response) => response.json())
         .then((data) => {
           const result = data.data;
-  
-          setLecturerName(result.fullName);
+          
+          setLecturerName(result.name);
         });
     }, [id]);
   
     const [toggleDisabled, setToggleDisabled] = useState(true)
       
   
-  const [submited , setSubmited] = useState('not submitted')
-  
+
   
     const submitHandler = async (e) => {
       e.preventDefault()
-      setSubmited('submitted')
+      setFireRedirect(true)
+      alert('Review Submitted')
+
   
-      setReview({
-        institutionid: props.match.params.slug,
-        careerProspect:"",
-        extraCurricularActivities:"",
-        safetyAndLocation:"",
-        learningAndMaterials:"",
-        foodAndHealth:"",
-        behaviourAndMorals:"",
-        learningEnvironment:"",
-        personalDevelopment:"",
-        difficulty:"",
-        schoolAgain:"",
-        review:""
-      })
+      
     
-    axios.post('http://13.244.78.114:4000/spruu/api/v1/user/lecturer/review', review)
+    axios.post('http://13.244.78.114:4000/spruu/api/v1/user/institution/review', review)
     .then((res) => {console.log(res.data)})
     .catch(err => {console.log(err)})
   
-  
+    setReview({
+      institutionid: props.match.params.slug,
+      careerProspect:"",
+      extraCurricularActivities:"",
+      safetyAndLocation:"",
+      learningAndMaterials:"",
+      foodAndHealth:"",
+      behaviourAndMorals:"",
+      learningEnvironment:"",
+      personalDevelopment:"",
+      difficulty:"",
+      schoolAgain:"",
+      review:""
+    })  
     
     }
     
    
-  
+    const { from } = props.location.fireRedirect || '/'
+
     return (
       <div as="form" className="review-container">
         <div className="rating-name-container">
@@ -319,12 +323,17 @@ const RateSchool = (props) => {
             </div>
           </div>
   
-          <CustomButton type="submit" onClick={submitHandler} disabled={toggleDisabled}>SUBMIT</CustomButton>
-          <Link to="/review" className="cancelBtn">
+          <CustomButton 
+          type="submit" 
+          onClick={submitHandler} 
+          disabled={toggleDisabled}> {toggleDisabled ? 'Fill all to Submit' : 'Submit Now'}</CustomButton>
+          <Link to="/find-a-school" className="cancelBtn">
             CANCEL
           </Link>
-          <div>Your form is: {submited}</div>
+          {fireRedirect && (
+                <Redirect to={from || `/rate-a-school`}/>)}
         </form>
+
       </div>
   );
 };
