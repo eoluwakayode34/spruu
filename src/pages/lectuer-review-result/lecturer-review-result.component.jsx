@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import StarRatings from "../../component/star-ratings/star-ratings.component";
 import ProgressBar from "../../component/progress-bar/progress-bar.component";
 import Select from "react-select";
+import CheckBox from '../../component/filter/filter.component'
 import {
   overalRating,
   Date,
@@ -43,6 +44,12 @@ const SchoolReviewResult = (props) => {
       });
   }, [id]);
 
+
+
+  const [reviewFilter, setReviewFilter] = useState([viewData])
+  const handleFilter = () => {
+
+  }
   // function reviewDate(d){
   //   let sDate = new Date(d);
   //   return sDate;
@@ -169,50 +176,50 @@ const SchoolReviewResult = (props) => {
           <div className="distribution-progress">
             <div className="distribution-progress-text">5 Star</div>
             <ProgressBar
-              percentage={Math.floor(viewData.reviewDistribution.fiveStar)}
+              percentage={viewData.reviewDistribution.fiveStar ? Math.floor(viewData.reviewDistribution.fiveStar) : 0}
             />
             <div className="distribution-progress__percentage">
-              {Math.floor(viewData.reviewDistribution.fiveStar)}%
+              {viewData.reviewDistribution.fiveStar ? Math.floor(viewData.reviewDistribution.fiveStar) :  0}%
             </div>
           </div>
 
           <div className="distribution-progress">
             <div className="distribution-progress-text">4 Star</div>
             <ProgressBar
-              percentage={Math.floor(viewData.reviewDistribution.fourStar)}
+              percentage={viewData.reviewDistribution.fourStar ? Math.floor(viewData.reviewDistribution.fourStar) : 0}
             />
             <div className="distribution-progress__percentage">
-              {Math.floor(viewData.reviewDistribution.fourStar)}%
+              {viewData.reviewDistribution.fourStar ? Math.floor(viewData.reviewDistribution.fourStar) : 0}%
             </div>
           </div>
 
           <div className="distribution-progress">
             <div className="distribution-progress-text">3 Star</div>
             <ProgressBar
-              percentage={Math.floor(viewData.reviewDistribution.threeStar)}
+              percentage={viewData.reviewDistribution.threeStar ? Math.floor(viewData.reviewDistribution.threeStar) : 0}
             />
             <div className="distribution-progress__percentage">
-              {Math.floor(viewData.reviewDistribution.threeStar)}%
+              {viewData.reviewDistribution.threeStar ? Math.floor(viewData.reviewDistribution.threeStar) : 0}%
             </div>
           </div>
 
           <div className="distribution-progress">
             <div className="distribution-progress-text">2 Star</div>
             <ProgressBar
-              percentage={Math.floor(viewData.reviewDistribution.twoStar)}
+              percentage={viewData.reviewDistribution.twoStar ? Math.floor(viewData.reviewDistribution.twoStar) : 0}
             />
             <div className="distribution-progress__percentage">
-              {Math.floor(viewData.reviewDistribution.twoStar)}%
+              {viewData.reviewDistribution.twoStar ? Math.floor(viewData.reviewDistribution.twoStar) : 0}%
             </div>
           </div>
 
           <div className="distribution-progress">
             <div className="distribution-progress-text">1 Star</div>
             <ProgressBar
-              percentage={Math.floor(viewData.reviewDistribution.oneStar)}
+              percentage={viewData.reviewDistribution.oneStar ? Math.floor(viewData.reviewDistribution.oneStar) : 0}
             />
             <div className="distribution-progress__percentage">
-              {Math.floor(viewData.reviewDistribution.oneStar)}%
+              {viewData.reviewDistribution.oneStar ? Math.floor(viewData.reviewDistribution.oneStar) : 0}%
             </div>
           </div>
         </div>
@@ -272,7 +279,7 @@ const SchoolReviewResult = (props) => {
 
         <div className="would-take-again">
           <h3 className="would-take-again-per">
-            {Math.floor(viewData.reviewDistribution.takeAgain)}%
+            {viewData.reviewDistribution.takeAgain ? Math.floor(viewData.reviewDistribution.takeAgain) : 0}%
           </h3>
           <p>
             {" "}
@@ -283,7 +290,7 @@ const SchoolReviewResult = (props) => {
       </div>
 
       <div className="review-bar"> {viewData.totalReviews} Review </div>
-
+              <CheckBox/>
       <div>
         <Select
           defaultValue={overalRating[0]}
@@ -457,7 +464,14 @@ const SchoolReviewResult = (props) => {
 
         </div>
         <div className='user-review'> { 'Review:'  + ' ' + review.review}</div>
-      </div>)}
+      </div>
+      
+      
+      )
+      
+      }
+
+      
     </div>
   ) : null;
 };
