@@ -5,7 +5,7 @@ import AutoComplete from '../../component/auto-complete/auto-complete.component'
 import { FaSearch } from "react-icons/fa";
 
 
-const Homepage = () => (
+const Homepage = props => (
     <div className="container">
         <div className="showcase">
             <h1 className='showcase-title' >SPRUU REVIEW</h1>
@@ -14,9 +14,11 @@ const Homepage = () => (
 
                 <AutoComplete type="search"  className='search' />
                 <FaSearch className='search-icon' />
+               
                 
                 
             </form>
+            
         </div>
     </div>
 

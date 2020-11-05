@@ -23,9 +23,9 @@ const Header = () => {
     <Burger open={open} setOpen={setOpen} />
 
     <div className="navigation">
-        <NavLink  to='/find-a-lecturer'  className="nav-item nav-link" activeClassName='active' >Find a Lecturer</NavLink>
-        <NavLink to='/rate-a-lecturer'  className="nav-item nav-link" activeClassName='active' >Rate a Lecturer </NavLink>
-        <NavLink to='/rate-a-school'  className="nav-item nav-link" activeClassName='active' >Rate a School</NavLink>
+        <NavLink  to='/find-a-lecturer'  className="nav-item nav-link" activeClassName='active' >Find A Lecturer</NavLink>
+        <NavLink to='/rate-a-lecturer'  className="nav-item nav-link" activeClassName='active' >Rate A Lecturer </NavLink>
+        <NavLink to='/rate-a-school'  className="nav-item nav-link" activeClassName='active' >Rate A School</NavLink>
         <NavLink to='/signin' className="nav-item button-sign-in">SIGN IN</NavLink>
         <NavLink to='/signup' className="nav-item button-sign-up ">SIGN UP</NavLink>
 

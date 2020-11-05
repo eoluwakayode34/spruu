@@ -3,9 +3,22 @@ import React, { useState, useEffect } from "react";
 import RatingButton from "../../component/button/button.component";
 import FormInput from "../../component/form-input/form-input.component";
 import CustomButton from "../../component/custom-button/custom-button.component";
-import { Link, Redirect} from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import "../rate-school/rate-school.styles.scss";
 import axios from "axios";
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  Button,
+} from "@chakra-ui/core";
 
 const RateLecturer = (props) => {
   const [review, setReview] = useState({
@@ -22,6 +35,9 @@ const RateLecturer = (props) => {
     takeAgain: "",
     review: "",
   });
+
+  
+
 
   const handleChange = (field, value) => {
     setReview({ ...review, [field]: value });
@@ -94,7 +110,7 @@ const RateLecturer = (props) => {
   const id = props.match.params.slug;
 
   useEffect(() => {
-    fetch(`http://13.244.78.114:4000/spruu/api/v1/user/lecturer/${id}`)
+    fetch(`http://13.244.171.145:4000/spruu/api/v1/user/lecturer/${id}`)
       .then((response) => response.json())
       .then((data) => {
         const result = data.data;
@@ -104,17 +120,16 @@ const RateLecturer = (props) => {
   }, [id]);
 
   const [toggleDisabled, setToggleDisabled] = useState(true);
-  const [fireRedirect, setFireRedirect] = useState(false)
-
+  const [fireRedirect, setFireRedirect] = useState(false);
 
   const submitHandler = async (e) => {
-    e.preventDefault();
-    setFireRedirect(true)
-    alert('Review Submitted')
+    // e.preventDefault();
+    setFireRedirect(true);
+    alert("Review Submitted Successfully");
 
-     axios
+    axios
       .post(
-        "http://13.244.78.114:4000/spruu/api/v1/user/lecturer/review",
+        "http://13.244.171.145:4000/spruu/api/v1/user/lecturer/review",
         review
       )
       .then((res) => {
@@ -124,24 +139,113 @@ const RateLecturer = (props) => {
         console.log(err);
       });
 
-      setReview({
-        lecturerid: props.match.params.slug,
-        classroomInteraction: "",
-        patience: "",
-        knowledgeOfMaterial: "",
-        organization: "",
-        communication: "",
-        authority: "",
-        compassion: "",
-        rapport: "",
-        difficulty: "",
-        takeAgain: "",
-        review: "",
-      });
+    setReview({
+      lecturerid: props.match.params.slug,
+      classroomInteraction: "",
+      patience: "",
+      knowledgeOfMaterial: "",
+      organization: "",
+      communication: "",
+      authority: "",
+      compassion: "",
+      rapport: "",
+      difficulty: "",
+      takeAgain: "",
+      review: "",
+    });
   };
 
-  const { from } = props.location.fireRedirect || '/'
+  // { !toggleDisabled ?  <div>
+  //   <AlertDialogOverlay />
+  //   <AlertDialogContent>
+  //     <Alert
+  //       status="success"
+  //       variant="subtle"
+  //       flexDirection="column"
+  //       justifyContent="center"
+  //       textAlign="center"
+  //       height="20rem"
+  //       mx={4}
+  //       my={44}
+  //       py={4}
+  //     >
+  //       <AlertIcon size="40px" mt={4} mb={4} />
+  //       <AlertTitle  mb={4} fontSize="2rem">
+  //         Submitted Successfully!
+  //       </AlertTitle>
+  //       <AlertDescription maxWidth="sm">
+  //         Thanks for submitting your review. Help others learn more about us
+  //         by sharing our website for lecturer and school review to enhance
+  //         tertiary education in Nigeria
+  //       </AlertDescription>
+  //     </Alert>
+  //   </AlertDialogContent>
+  // </div> : <div>
+  //   <AlertDialogOverlay />
+  //   <AlertDialogContent>
+  //     <Alert
+  //       status="error"
+  //       variant="subtle"
+  //       flexDirection="column"
+  //       justifyContent="center"
+  //       textAlign="center"
+  //       height="20rem"
+  //       mx={4}
+  //       my={44}
+  //       py={4}
+  //     >
+  //       <AlertIcon size="40px" mt={4} mb={4} />
+  //       <AlertTitle  mb={4} fontSize="2rem">
+  //        Review Not Submitted 
+  //       </AlertTitle>
+  //       <AlertDescription maxWidth="sm">
+  //        Fill form completely
+  //       </AlertDescription>
+  //     </Alert>
+  //   </AlertDialogContent>
+  // </div>}
+  // let errorMessage;
+  // function errorAlertMessage(){
+   
+  //   alert('hello')
+  //    errorMessage = <div>
+  //      <AlertDialogOverlay />
+  //      <AlertDialogContent>
+  //        <Alert
+  //         status="error"
+  //         variant="subtle"
+  //         flexDirection="column"
+  //         justifyContent="center"
+  //         textAlign="center"
+  //         height="20rem"
+  //         mx={4}
+  //         my={44}
+  //         py={4}
+  //       >
+  //         <AlertIcon size="40px" mt={4} mb={4} />
+  //         <AlertTitle  mb={4} fontSize="2rem">
+  //          Review Not Submitted 
+  //         </AlertTitle>
+  //         <AlertDescription maxWidth="sm">
+  //          Fill form completely
+  //         </AlertDescription>
+  //       </Alert>
+  //     </AlertDialogContent>
+  //   </div>
 
+  //   return errorMessage;
+  // }
+
+  function reviewSubmit(e){
+    e.preventDefault()
+    if (toggleDisabled) {
+      alert('Review not submitted, fill form completely')
+    } else {
+      submitHandler();
+    }
+  };
+
+  const { from } = props.location.fireRedirect || "/";
 
   return (
     <div as="form" className="review-container">
@@ -182,7 +286,7 @@ const RateLecturer = (props) => {
           </div>
 
           <div className="rating-box">
-            <h4 className="rating-heading"> Knowledge of Medical</h4>
+            <h4 className="rating-heading"> Knowledge of Material</h4>
             <RatingButton
               name="knowledgeOfMaterial"
               selected={review.knowledgeOfMaterial}
@@ -237,7 +341,7 @@ const RateLecturer = (props) => {
 
           <div className="rating-box">
             <h4 className="rating-heading">
-              Would you take this Lecturer Again ?
+              Would You Take This Lecturer Again ?
             </h4>
             <div className="form-button__group">
               <div>
@@ -274,7 +378,7 @@ const RateLecturer = (props) => {
           <div className="rating-box">
             <h4 className="rating-heading">Review</h4>
             <textarea
-              placeholder="write your review"
+              placeholder="Write Your Review"
               name={review.review}
               onChange={handleReview}
             ></textarea>
@@ -315,22 +419,29 @@ const RateLecturer = (props) => {
             </label>
           </div>
         </div>
-        <div>Hello</div>
-        {toggleDisabled ? "You must fill all section to submit the form" : ''}
+
         <CustomButton
           type="submit"
-          onClick={submitHandler}
-          disabled={toggleDisabled}
-          
+          onClick={reviewSubmit}
+          // disabled={toggleDisabled}
         >
-          {toggleDisabled ? 'Fill all to Submit' : 'Submit Now'}
+          Submit Now
         </CustomButton>
-        <Link to="/review" className="cancelBtn">
+
+
+      {/* {toggleDisabled && errorAlertMessage()} */}
+        
+      
+        
+        {/* </AlertDialog> */}
+
+        <Link to={`/lecturer-review-result/${id}`} className="cancelBtn">
           CANCEL
         </Link>
 
         {fireRedirect && (
-                <Redirect to={from || `/find-a-lecturer`}/>)}
+          <Redirect to={from || `/lecturer-review-result/${id}`} />
+        )}
       </form>
     </div>
   );

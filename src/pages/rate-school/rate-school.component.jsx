@@ -113,7 +113,7 @@ const RateSchool = (props) => {
     const id = props.match.params.slug;
   
     useEffect(() => {
-      fetch(`http://13.244.78.114:4000/spruu/api/v1/user/institution/${id}`)
+      fetch(`http://13.244.171.145:4000/spruu/api/v1/user/institution/${id}`)
         .then((response) => response.json())
         .then((data) => {
           const result = data.data;
@@ -128,9 +128,9 @@ const RateSchool = (props) => {
 
   
     const submitHandler = async (e) => {
-      e.preventDefault()
+      // e.preventDefault()
       setFireRedirect(true)
-      alert('Review Submitted')
+      alert('Review Submitted Successfully')
 
   
       
@@ -155,6 +155,15 @@ const RateSchool = (props) => {
     })  
     
     }
+
+    function reviewSubmit(e){
+      e.preventDefault()
+      if (toggleDisabled) {
+        alert('Review not submitted, fill form completely')
+      } else {
+        submitHandler();
+      }
+    };
     
    
     const { from } = props.location.fireRedirect || '/'
@@ -171,7 +180,7 @@ const RateSchool = (props) => {
         <form>
           <div className="rating-container">
             <div className="rating-box">
-              <h4 className="rating-heading"> {name.career} </h4>
+              <h4 className="rating-heading title-case"> {name.career} </h4>
               <RatingButton 
               name='careerProspect'
               selected={review.careerProspect}
@@ -180,7 +189,7 @@ const RateSchool = (props) => {
             </div>
   
             <div className="rating-box">
-              <h4 className="rating-heading"> {name.extraCur}</h4>
+              <h4 className="rating-heading title-case"> {name.extraCur}</h4>
               <RatingButton 
               name='extraCurricularActivities'
               selected={review.extraCurricularActivities}
@@ -188,7 +197,7 @@ const RateSchool = (props) => {
             </div>
   
             <div className="rating-box">
-            <h4 className="rating-heading">{name.safety}</h4>
+            <h4 className="rating-heading title-case">{name.safety}</h4>
               <RatingButton 
               name='safetyAndLocation'
               selected={review.safetyAndLocation}
@@ -196,7 +205,7 @@ const RateSchool = (props) => {
             </div>
   
             <div className="rating-box">
-              <h4 className="rating-heading">{name.learningMat}</h4>
+              <h4 className="rating-heading title-case">{name.learningMat}</h4>
               <RatingButton 
               name='learningAndMaterials'
               selected={review.learningAndMaterials}
@@ -204,7 +213,7 @@ const RateSchool = (props) => {
             </div>
   
             <div className="rating-box">
-              <h4 className="rating-heading"
+              <h4 className="rating-heading title-case"
               > {name.foodAndHealth}</h4>
               <RatingButton 
               name='foodAndHealth'
@@ -213,7 +222,7 @@ const RateSchool = (props) => {
             </div>
   
             <div className="rating-box">
-            <h4 className="rating-heading"> {name.behaviourMoral}</h4>
+            <h4 className="rating-heading title-case"> {name.behaviourMoral}</h4>
               <RatingButton 
               name='behaviourAndMorals'
               selected={review.behaviourAndMorals}
@@ -221,7 +230,7 @@ const RateSchool = (props) => {
             </div>
   
             <div className="rating-box">
-        <h4 className="rating-heading"> {name.learningEnv}</h4>
+        <h4 className="rating-heading title-case"> {name.learningEnv}</h4>
               <RatingButton 
               name='learningEnvironment'
               selected={review.learningEnvironment} 
@@ -229,26 +238,26 @@ const RateSchool = (props) => {
             </div>
   
             <div className="rating-box">
-    <h4 className="rating-heading"> {name.PersonalDiv}</h4>
+    <h4 className="rating-heading title-case"> Personal Development</h4>
               <RatingButton
                name='rapport'
                selected={review.rapport}
                handleChange={handleChange}  />
             </div>
-  
-            <div className="rating-box">
-              <h4 className="rating-heading"> Difficulty</h4>
+             <div className="rating-box">
+              <h4 className="rating-heading title-case"> Difficulty</h4>
               <RatingButton 
               name='difficulty' 
               selected={review.difficulty}
               handleChange={handleChange}/>
             </div>
   
+            
             <div className="rating-box">
-              <h4 className="rating-heading">
+              <h4 className="rating-heading title-case">
                 Would you take this Lecturer Again ?
               </h4>
-              <div className="form-button__group">
+              <div className="form-button__group take-again-button">
                 <div>
                   <div className="form-radio__group">
                     <label>
@@ -282,7 +291,7 @@ const RateSchool = (props) => {
   
             <div className="rating-box">
               <h4 className="rating-heading">Review</h4>
-              <textarea placeholder="write your review"
+              <textarea placeholder="Write Your Review"
               name={review.review}
               onChange={handleReview} ></textarea>
             </div>
@@ -325,13 +334,14 @@ const RateSchool = (props) => {
   
           <CustomButton 
           type="submit" 
-          onClick={submitHandler} 
-          disabled={toggleDisabled}> {toggleDisabled ? 'Fill all to Submit' : 'Submit Now'}</CustomButton>
-          <Link to="/find-a-school" className="cancelBtn">
+          onClick={reviewSubmit} 
+          // disabled={toggleDisabled}
+          > {'Submit Now'}</CustomButton>
+          <Link to={`/school-review-result/${id}`} className="cancelBtn">
             CANCEL
           </Link>
           {fireRedirect && (
-                <Redirect to={from || `/rate-a-school`}/>)}
+                <Redirect to={from || `/school-review-result/${id}`}/>)}
         </form>
 
       </div>

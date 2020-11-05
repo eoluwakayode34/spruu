@@ -37,7 +37,7 @@ class RateASchool extends React.Component {
       const regex = new RegExp('^' + escapedValue, 'i');
     
       try{
-        axios('http://13.244.78.114:4000/spruu/api/v1/user/institutions')
+        axios('http://13.244.171.145:4000/spruu/api/v1/user/institutions')
                
         .then(users => {
           const school = users.data.data.filter(name => regex.test(name.name))
@@ -49,13 +49,16 @@ class RateASchool extends React.Component {
         
         })
        
-    console.log(this.state)
-      
+     
       }catch(e){
         this.setState({
           suggestions: []
         });
       }}
+
+      shouldRenderSuggestions(value) {
+        return value.trim().length > 2;
+      }
      
       
 
@@ -68,7 +71,7 @@ class RateASchool extends React.Component {
   render() {
     const { value, suggestions, isLoaded } = this.state;
     const inputProps = {
-      placeholder: "Rate a school",
+      placeholder: "Type Name of School",
       value,
       onChange: this.onChange,
     };
@@ -77,12 +80,14 @@ class RateASchool extends React.Component {
       <div className="content">
         <FormContainer>
           <div className="container">
-            <h2>Rate a School</h2>
+            <h2>Rate A School</h2>
             <Autosuggest 
         isLoaded={isLoaded}
         suggestions={suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+        shouldRenderSuggestions = {this.shouldRenderSuggestions}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        
         getSuggestionValue={function getSuggestionValue(suggestion) {
           return suggestion.name;
         }}
@@ -93,8 +98,8 @@ class RateASchool extends React.Component {
             key={suggestion._id}
             className='suggestion-list'
             >
-                          <span>{suggestion.name}</span>
-                          <div>{suggestion.state},{suggestion.country}</div>
+                          <span className='title-case'>{suggestion.name}</span>
+                          <div className='title-case'>{suggestion.state}, {suggestion.country}</div>
 
             </Link>
           );

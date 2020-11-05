@@ -2,6 +2,8 @@
     width: 75%;
     margin: 4rem auto;
     font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
 
     @media only screen and (max-width: 42rem) {
         width: 90%;
@@ -11,7 +13,7 @@
         width: 100%;
     }
 
-   
+
 }
 
 .text-medium {
@@ -23,6 +25,7 @@
 .result-name {
     font-size: 3rem;
     font-weight: 600;
+    text-transform: capitalize;
 
     @media only screen and (max-width: 33.4rem) {
         font-size: 2.5rem;
@@ -32,6 +35,7 @@
 
 .result-description {
     font-size: 1.7rem;
+    text-transform: capitalize;
 }
 
 .review-btn {
@@ -58,7 +62,7 @@
 .review-image {
     width: 100%;
 
-    &-school-container{
+    &-school-container {
         width: 15rem;
         height: 15rem;
         background: url('../../asset/school.png');
@@ -215,27 +219,27 @@
     }
 }
 
-.very-easy{
+.very-easy {
     background: #43C51D;
     color: white;
 }
 
-.easy{
+.easy {
     background: #A4F629;
     color: #000;
 }
 
-.neutral{
+.neutral {
     background: #F3D71E;
     color: #000;
 }
 
-.difficult{
+.difficult {
     background: #F5621D;
     color: #fff;
 }
 
-.very-difficult{
+.very-difficult {
     background: #EF261F;
     color: #fff;
 }
@@ -251,7 +255,7 @@
 }
 
 .rating-distribution-header {
-    text-align: center;
+    text-align: left;
 }
 
 
@@ -356,3 +360,13 @@
     margin: 0 .5rem;
 
 }
+
+
+// pagination
+.pagination {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}
+
+.pagination-button {}

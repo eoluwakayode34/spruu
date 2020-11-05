@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "../school-review-result/review-result.styles.scss";
+import "../../component/review-list/review-list.style.scss";
 import { Link } from "react-router-dom";
 import StarRatings from "../../component/star-ratings/star-ratings.component";
 import ProgressBar from "../../component/progress-bar/progress-bar.component";
-import CheckBox from "../../component/filter/filter.component";
+import Filter from "../../component/filter/filter.component";
+// import axios from 'axios'
 // import {
 //   overalRating,
 //   Date,
@@ -11,17 +13,18 @@ import CheckBox from "../../component/filter/filter.component";
 //   takeAgain,
 // } from "../../component/select-dropdown-data/select-dropdown.component";
 
-import { ReactComponent as Gender } from "../../asset/gender.png";
+import Gender  from "../../asset/gender.png";
 
 const SchoolReviewResult = (props) => {
+  let currPage = 1;
+  const id = props.match.params.slug;
+
   const [viewData, setViewData] = useState(null);
   const [lecturerInfo, setLecturerInfo] = useState(null);
 
-  const id = props.match.params.slug;
-
   useEffect(() => {
     // let _id = "5eb0ba69580e3d1d458a724b";
-    fetch(`http://13.244.78.114:4000/spruu/api/v1/user/lecturer/${id}`)
+    fetch(`http://13.244.171.145:4000/spruu/api/v1/user/lecturer/${id}`)
       .then((response) => response.json())
       .then((data) => {
         const result = data.data;
@@ -31,15 +34,33 @@ const SchoolReviewResult = (props) => {
       });
   }, [id]);
 
+  const handleNext = () => {
+    currPage = currPage + 1;
+
+    if (currPage < 1) {
+      currPage = 1;
+    }
+  };
+
+  const handlePrev = () => {
+    currPage = currPage - 1;
+
+    if (currPage < 1) {
+      currPage = 1;
+    }
+  };
+
   useEffect(() => {
     // let _id = "5eb0ba69580e3d1d458a724b";
-    fetch(`http://13.244.78.114:4000/spruu/api/v1/user/lecturer/review/${id}`)
+    fetch(
+      `http://13.244.171.145:4000/spruu/api/v1/user/lecturer/review/${id}/${currPage}`
+    )
       .then((response) => response.json())
       .then((data) => {
         const result = data.data;
         setViewData(result);
       });
-  }, [id]);
+  }, [currPage]);
 
   // const [reviewFilter, setReviewFilter] = useState([viewData])
   // const handleFilter = () => {
@@ -50,19 +71,29 @@ const SchoolReviewResult = (props) => {
   //   return sDate;
   // }
 
-  const displayDate = (datetime) => {
-    if (
-      new Intl.DateTimeFormat("en-US").format(new Date()) ===
-      new Intl.DateTimeFormat("en-US").format(new Date(datetime))
-    )
-      return new Intl.DateTimeFormat("en-US", {
-        year: "2-digit",
-        month: "2-digit",
-        day: "2-digit",
-      }).format(new Date(datetime));
+  const reviewDifficulty = (diff) => {
+    if (diff === 1) {
+      return "Very Easy";
+    } else if (diff === 2) {
+      return "Easy";
+    } else if (diff === 3) {
+      return "Neutral";
+    } else if (diff === 4) {
+      return "Difficult";
+    } else {
+      return "Very Difficult";
+    }
   };
 
-  return viewData ? (
+  const displayDate = (datetime) => {
+    return new Intl.DateTimeFormat("en-US", {
+      year: "2-digit",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(new Date(datetime));
+  };
+
+  return viewData && lecturerInfo ? (
     <div className="review-result-container">
       <div className="review-person-box">
         <div className="review-image-container">
@@ -74,11 +105,12 @@ const SchoolReviewResult = (props) => {
           <div className="overall-s-r-b">
             <p className="text-medium">Overall Quality </p>
             <StarRatings
-              rating={2.403}
+              rating={viewData.overallQuality}
               starDimension="2rem"
               starSpacing=".5rem"
               starRatedColor="#CA8831"
             />
+
           </div>
           <Link exact="true" to={"/review/" + id} className="review-btn">
             REVIEW {lecturerInfo.fullName}
@@ -269,7 +301,7 @@ const SchoolReviewResult = (props) => {
           <div className="diff-level-selected">
             <div
               className={
-                viewData.hightlights.difficulty === 1
+                Math.round(viewData.hightlights.difficulty) === 1
                   ? "diff-level-selected-item very-easy"
                   : "diff-level-selected-item"
               }
@@ -278,7 +310,7 @@ const SchoolReviewResult = (props) => {
             </div>
             <div
               className={
-                viewData.hightlights.difficulty === 2
+                Math.round(viewData.hightlights.difficulty) === 2
                   ? "diff-level-selected-item easy"
                   : "diff-level-selected-item"
               }
@@ -287,7 +319,7 @@ const SchoolReviewResult = (props) => {
             </div>
             <div
               className={
-                viewData.hightlights.difficulty === 3
+                Math.round(viewData.hightlights.difficulty) === 3
                   ? "diff-level-selected-item neutral"
                   : "diff-level-selected-item"
               }
@@ -296,7 +328,7 @@ const SchoolReviewResult = (props) => {
             </div>
             <div
               className={
-                viewData.hightlights.difficulty === 4
+                Math.round(viewData.hightlights.difficulty) === 4
                   ? "diff-level-selected-item difficult"
                   : "diff-level-selected-item"
               }
@@ -305,7 +337,7 @@ const SchoolReviewResult = (props) => {
             </div>
             <div
               className={
-                viewData.hightlights.difficulty === 5
+                Math.round(viewData.hightlights.difficulty) === 5
                   ? "diff-level-selected-item very-difficult"
                   : "diff-level-selected-item"
               }
@@ -324,14 +356,14 @@ const SchoolReviewResult = (props) => {
           </h3>
           <p>
             {" "}
-            Would take this <br />
-            lecturer a Again
+            Would Take This <br />
+            Lecturer Again
           </p>
         </div>
       </div>
 
-      <div className="review-bar"> {viewData.totalReviews} Review </div>
-      <CheckBox />
+      <div className="review-bar"> {viewData.totalReviews} Review(s) </div>
+      {/* <Filter /> */}
       {/* <div>
         <Select
           defaultValue={overalRating[0]}
@@ -399,7 +431,7 @@ const SchoolReviewResult = (props) => {
           <div className="flex mb-3 br-5">
             <div className="rating-category-item-text pd3">
               <StarRatings
-                rating={review.classroomInteraction}
+                rating={review.overallQuality}
                 starDimension="1.3rem"
                 starSpacing=".2rem"
                 starRatedColor="#CA8831"
@@ -410,7 +442,7 @@ const SchoolReviewResult = (props) => {
               {displayDate(review.createdAt)}
             </div>
             <div className="rating-category-item-text pd3">
-              {"Very Difficulty"}
+              {reviewDifficulty(review.difficulty)}
             </div>
             <div className="rating-category-item-text pd3">
               {review.takeAgain ? "Yes" : "No"}
@@ -509,10 +541,21 @@ const SchoolReviewResult = (props) => {
             </div>
           </div>
           <div className="user-review">
-            <span>Review:</span> {" " + review.review}
+            <span> {"Review: " + " " + review.review}</span>
           </div>
         </div>
       ))}
+
+      <div className="pagination">
+        <button className="review-btn" onClick={handlePrev}>
+          {" "}
+          &#8810; Prev Page
+        </button>
+        <button className="review-btn" onClick={handleNext}>
+          {" "}
+          Next Page &#8811;
+        </button>
+      </div>
     </div>
   ) : null;
 };

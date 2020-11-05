@@ -67,7 +67,7 @@ class RateALecturer extends React.Component {
       const regex = new RegExp('^' + escapedValue, 'i');
     
       try{
-        axios('http://13.244.78.114:4000/spruu/api/v1/user/lecturers')
+        axios('http://13.244.171.145:4000/spruu/api/v1/user/lecturers')
                
         .then(users => {
           const lecturer = users.data.data.filter(name => regex.test(name.fullName))
@@ -90,7 +90,7 @@ class RateALecturer extends React.Component {
   render() {
     const { value, suggestions, isLoaded } = this.state;
     const inputProps = {
-      placeholder: "Rate a lecturer",
+      placeholder: "Type Name of Lecturer",
       value,
       onChange: this.onChange,
     };
@@ -99,10 +99,11 @@ class RateALecturer extends React.Component {
       <div className="content">
         <FormContainer>
           <div className="container">
-            <h2>Rate a Lecturer</h2>
+            <h2>Rate A Lecturer</h2>
             <Autosuggest 
         isLoaded={isLoaded}
         suggestions={suggestions}
+        shouldRenderSuggestions = {this.shouldRenderSuggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
         getSuggestionValue={function getSuggestionValue(suggestion) {

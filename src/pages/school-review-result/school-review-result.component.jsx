@@ -3,7 +3,10 @@ import "./review-result.styles.scss";
 import { Link } from "react-router-dom";
 import StarRatings from "../../component/star-ratings/star-ratings.component";
 import ProgressBar from "../../component/progress-bar/progress-bar.component";
+import Pagination from "react-js-pagination";
 import Filter from "../../component/filter/filter.component";
+import CustomButton from "../../component/custom-button/custom-button.component";
+import axios from "axios";
 // import ReviewList from '../../component/review-list/review-list.component';
 // import Select from "react-select";
 // import {
@@ -23,55 +26,116 @@ import Filter from "../../component/filter/filter.component";
 // inputProps={inputProps}
 
 const SchoolReviewResult = (props) => {
-  const [viewData, setViewData] = useState(null);
-  const [schoolInfo, setSchoolInfo] = useState(null);
-
   const id = props.match.params.slug;
+  // const filterUrl = '13.244.171.145:4000/spruu/api/v1/user/filter/institution/'
+
+  let currPage = 1;
+  let reviewURL = `http://13.244.171.145:4000/spruu/api/v1/user/institution/review/${id}/${currPage}`;
+
+  // const [next, setNext] = useState(1)
+  const [viewData, setViewData] = useState(null);
+  const [distribution, setDistribution] = useState(null);
+  const [schoolInfo, setSchoolInfo] = useState(null);
+  const [url, setUrl] = useState(reviewURL);
+  const [filterResult, setFilterResult] = useState({
+    name: "",
+    category: "",
+  });
+
+  // const handleFilter = (by, option) => {
+  //   setFilterResult({name: by, category: option})
+  //   setUrl(`http://13.244.171.145:4000/spruu/api/v1/user/filter/institution/${id}/${filterResult.name}/${filterResult.category}/${currPage}` )
+  //   alert(url)
+
+  // }
+
+  const handleNext = () => {
+    currPage = currPage + 1;
+
+    if (currPage < 1) {
+      currPage = 1;
+    }
+
+    setUrl(
+      `http://13.244.171.145:4000/spruu/api/v1/user/institution/review/${id}/${currPage}`
+    );
+  };
+
+  const handlePrev = () => {
+    currPage = currPage - 1;
+
+    if (currPage < 1) {
+      currPage = 1;
+    }
+
+    setUrl(
+      `http://13.244.171.145:4000/spruu/api/v1/user/institution/review/${id}/${currPage}`
+    );
+  };
 
   useEffect(() => {
     // let _id = "5eb0ba69580e3d1d458a724b";
-    fetch(`http://13.244.78.114:4000/spruu/api/v1/user/institution/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        const result = data.data;
-        console.log(result);
+    async function getData() {
+      const response = await axios
+        .get(`http://13.244.171.145:4000/spruu/api/v1/user/institution/${id}`)
+        .then((response) => {
+          setSchoolInfo(response.data.data);
+        });
+    }
 
-        setSchoolInfo(result);
-      });
-  }, [id]);
+    async function disData() {
+      const response = await axios.get(
+          `http://13.244.171.145:4000/spruu/api/v1/user/institution/review/${id}/${currPage}`
+        )
+        .then((response) => {
+          console.log("distribution");
+          setDistribution(response.data.data);
+        });
+    }   
+
+    disData();
+    getData();
+  }, [currPage]);
 
   useEffect(() => {
     // let _id = "5eb0ba69580e3d1d458a724b";
-    fetch(
-      `http://13.244.78.114:4000/spruu/api/v1/user/institution/review/${id}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        const result = data.data;
-        console.log(result);
-
-        setViewData(result);
+    async function reviewFilter() {
+      const response = await axios.get(`${url}`).then((response) => {
+        console.log("distribution");
+        setViewData(response.data.data);
       });
-  }, [id]);
+    }
+
+    reviewFilter();
+  }, [url]);
 
   // function reviewDate(d){
   //   let sDate = new Date(d);
   //   return sDate;
   // }
-
-  const displayDate = (datetime) => {
-    if (
-      new Intl.DateTimeFormat("en-US").format(new Date()) ===
-      new Intl.DateTimeFormat("en-US").format(new Date(datetime))
-    )
-      return new Intl.DateTimeFormat("en-US", {
-        year: "2-digit",
-        month: "2-digit",
-        day: "2-digit",
-      }).format(new Date(datetime));
+  const reviewDifficulty = (diff) => {
+    if (diff === 1) {
+      return "Very Easy";
+    } else if (diff === 2) {
+      return "Easy";
+    } else if (diff === 3) {
+      return "Neutral";
+    } else if (diff === 4) {
+      return "Difficult";
+    } else {
+      return "Very Difficult";
+    }
   };
 
-  return viewData ? (
+  const displayDate = (datetime) => {
+    return new Intl.DateTimeFormat("en-US", {
+      year: "2-digit",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(new Date(datetime));
+  };
+
+  return viewData && schoolInfo && distribution ? (
     <div className="review-result-container">
       <div className="review-person-box">
         <div className="review-image-school-container">
@@ -80,12 +144,12 @@ const SchoolReviewResult = (props) => {
         <div className="name-and-attr">
           <h3 className="result-name">{schoolInfo.name}</h3>
           <h4 className="result-description">
-            {schoolInfo.state + "," + schoolInfo.country}
+            {schoolInfo.state + "," + " " + schoolInfo.country}
           </h4>
           <div className="overall-s-r-b">
             <p className="text-medium">Overall Quality </p>
             <StarRatings
-              rating={2.403}
+              rating={viewData.overallQuality}
               starDimension="2rem"
               starSpacing=".5rem"
               starRatedColor="#CA8831"
@@ -197,14 +261,14 @@ const SchoolReviewResult = (props) => {
             <div className="distribution-progress-text">5 Star</div>
             <ProgressBar
               percentage={
-                viewData.reviewDistribution.fiveStar
-                  ? Math.floor(viewData.reviewDistribution.fiveStar)
+                distribution.reviewDistribution.fiveStar
+                  ? Math.floor(distribution.reviewDistribution.fiveStar)
                   : 0
               }
             />
             <div className="distribution-progress__percentage">
-              {viewData.reviewDistribution.fiveStar
-                ? Math.floor(viewData.reviewDistribution.fiveStar)
+              {distribution.reviewDistribution.fiveStar
+                ? Math.floor(distribution.reviewDistribution.fiveStar)
                 : 0}
               %
             </div>
@@ -214,14 +278,14 @@ const SchoolReviewResult = (props) => {
             <div className="distribution-progress-text">4 Star</div>
             <ProgressBar
               percentage={
-                viewData.reviewDistribution.fourStar
-                  ? Math.floor(viewData.reviewDistribution.fourStar)
+                distribution.reviewDistribution.fourStar
+                  ? Math.floor(distribution.reviewDistribution.fourStar)
                   : 0
               }
             />
             <div className="distribution-progress__percentage">
-              {viewData.reviewDistribution.fourStar
-                ? Math.floor(viewData.reviewDistribution.fourStar)
+              {distribution.reviewDistribution.fourStar
+                ? Math.floor(distribution.reviewDistribution.fourStar)
                 : 0}
               %
             </div>
@@ -231,14 +295,14 @@ const SchoolReviewResult = (props) => {
             <div className="distribution-progress-text">3 Star</div>
             <ProgressBar
               percentage={
-                viewData.reviewDistribution.threeStar
-                  ? Math.floor(viewData.reviewDistribution.threeStar)
+                distribution.reviewDistribution.threeStar
+                  ? Math.floor(distribution.reviewDistribution.threeStar)
                   : 0
               }
             />
             <div className="distribution-progress__percentage">
-              {viewData.reviewDistribution.threeStar
-                ? Math.floor(viewData.reviewDistribution.threeStar)
+              {distribution.reviewDistribution.threeStar
+                ? Math.floor(distribution.reviewDistribution.threeStar)
                 : 0}
               %
             </div>
@@ -248,14 +312,14 @@ const SchoolReviewResult = (props) => {
             <div className="distribution-progress-text">2 Star</div>
             <ProgressBar
               percentage={
-                viewData.reviewDistribution.twoStar
-                  ? Math.floor(viewData.reviewDistribution.twoStar)
+                distribution.reviewDistribution.twoStar
+                  ? Math.floor(distribution.reviewDistribution.twoStar)
                   : 0
               }
             />
             <div className="distribution-progress__percentage">
-              {viewData.reviewDistribution.twoStar
-                ? Math.floor(viewData.reviewDistribution.twoStar)
+              {distribution.reviewDistribution.twoStar
+                ? Math.floor(distribution.reviewDistribution.twoStar)
                 : 0}
               %
             </div>
@@ -265,14 +329,14 @@ const SchoolReviewResult = (props) => {
             <div className="distribution-progress-text">1 Star</div>
             <ProgressBar
               percentage={
-                viewData.reviewDistribution.oneStar
-                  ? Math.floor(viewData.reviewDistribution.oneStar)
+                distribution.reviewDistribution.oneStar
+                  ? Math.floor(distribution.reviewDistribution.oneStar)
                   : 0
               }
             />
             <div className="distribution-progress__percentage">
-              {viewData.reviewDistribution.oneStar
-                ? Math.floor(viewData.reviewDistribution.oneStar)
+              {distribution.reviewDistribution.oneStar
+                ? Math.floor(distribution.reviewDistribution.oneStar)
                 : 0}
               %
             </div>
@@ -286,7 +350,7 @@ const SchoolReviewResult = (props) => {
           <div className="diff-level-selected">
             <div
               className={
-                viewData.hightlights.difficulty === 1
+                Math.round(distribution.hightlights.difficulty) === 1
                   ? "diff-level-selected-item very-easy"
                   : "diff-level-selected-item"
               }
@@ -295,7 +359,7 @@ const SchoolReviewResult = (props) => {
             </div>
             <div
               className={
-                viewData.hightlights.difficulty === 2
+                Math.round(distribution.hightlights.difficulty) === 2
                   ? "diff-level-selected-item easy"
                   : "diff-level-selected-item"
               }
@@ -304,7 +368,7 @@ const SchoolReviewResult = (props) => {
             </div>
             <div
               className={
-                viewData.hightlights.difficulty === 3
+                Math.round(distribution.hightlights.difficulty) === 3
                   ? "diff-level-selected-item neutral"
                   : "diff-level-selected-item"
               }
@@ -313,7 +377,7 @@ const SchoolReviewResult = (props) => {
             </div>
             <div
               className={
-                viewData.hightlights.difficulty === 4
+                Math.round(distribution.hightlights.difficulty) === 4
                   ? "diff-level-selected-item difficult"
                   : "diff-level-selected-item"
               }
@@ -322,7 +386,7 @@ const SchoolReviewResult = (props) => {
             </div>
             <div
               className={
-                viewData.hightlights.difficulty === 5
+                Math.round(distribution.hightlights.difficulty) === 5
                   ? "diff-level-selected-item very-difficult"
                   : "diff-level-selected-item"
               }
@@ -334,20 +398,38 @@ const SchoolReviewResult = (props) => {
 
         <div className="would-take-again">
           <h3 className="would-take-again-per">
-            {viewData.reviewDistribution.schoolAgain
-              ? Math.floor(viewData.reviewDistribution.schoolAgain)
+            {distribution.reviewDistribution.schoolAgain
+              ? Math.floor(distribution.reviewDistribution.schoolAgain)
               : 0}
             %
           </h3>
           <p>
             {" "}
-            Would take this <br />
-            lecturer a Again
+            Would Take This <br />
+            Lecturer Again
           </p>
         </div>
       </div>
 
-      <div className="review-bar"> {viewData.totalReviews} Review </div>
+      <div className="review-bar"> {viewData.totalReviews} Review(s) </div>
+
+        {/* <select
+          value={filterResult.category}
+          name="overall"
+          onChange={(e) => {
+            setFilterResult({ name: e.target.name, category: e.target.value });
+            setUrl(
+              `http://13.244.171.145:4000/spruu/api/v1/user/filter/institution/${id}/difficulty/2/1`
+            );
+            console.log(filterResult.name + filterResult.category);
+          }}
+        >
+          <option value="1">1 star</option>
+          <option value="2">2 star</option>
+          <option value="3">3 star</option>
+          <option value="4">4 star</option>
+          <option value="5">5 star</option>
+        </select> */}
 
       {/* <div>
         <Select
@@ -416,7 +498,7 @@ const SchoolReviewResult = (props) => {
           <div className="flex mb-3 br-5">
             <div className="rating-category-item-text pd3">
               <StarRatings
-                rating={review.classroomInteraction}
+                rating={review.overallQuality}
                 starDimension="1.3rem"
                 starSpacing=".2rem"
                 starRatedColor="#CA8831"
@@ -427,7 +509,7 @@ const SchoolReviewResult = (props) => {
               {displayDate(review.createdAt)}
             </div>
             <div className="rating-category-item-text pd3">
-              {"Very Difficulty"}
+              {reviewDifficulty(review.difficulty)}
             </div>
             <div className="rating-category-item-text pd3">
               {review.takeAgain ? "Yes" : "No"}
@@ -538,6 +620,17 @@ const SchoolReviewResult = (props) => {
           <div className="user-review"> {"Review:" + " " + review.review}</div>
         </div>
       ))}
+
+      <div className="pagination">
+        <button className="review-btn" onClick={handlePrev}>
+          {" "}
+          &#8810; Prev Page
+        </button>
+        <button className="review-btn" onClick={handleNext}>
+          {" "}
+          Next Page &#8811;
+        </button>
+      </div>
     </div>
   ) : null;
 };

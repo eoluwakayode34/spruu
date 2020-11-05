@@ -8,7 +8,7 @@ $color-primary: #CA8831;
 
 .header {
     background: white;
-    height: 8rem;
+    height: 6rem;
     border-bottom: 1px solid $color-primary;
     display: flex;
     align-items: center;
@@ -107,8 +107,8 @@ $color-primary: #CA8831;
 
 
 .logo-container{
-    height: 5rem;
-        width: 5rem;
+    height: 4rem;
+        width: 4rem;
 
 
     @media only screen and (max-width: 24rem){

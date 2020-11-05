@@ -13,9 +13,12 @@ import RateASchool from './pages/rate-a-school-page/rate-a-school.component';
 import RateLecturer from './pages/rate-lecturer/rate-lecturer.component';
 import SchoolReviewResult from './pages/school-review-result/school-review-result.component';
 import  LecturerReviewResult from "./pages/lectuer-review-result/lecturer-review-result.component";
+import { ThemeProvider } from "@chakra-ui/core";
+
 
 function App() {
   return (
+    <ThemeProvider>
     <div className="App">
         <Header/>
           <Switch>
@@ -35,6 +38,7 @@ function App() {
           </Switch>
         <Footer/>
     </div>
+    </ThemeProvider>
   );
 }
 

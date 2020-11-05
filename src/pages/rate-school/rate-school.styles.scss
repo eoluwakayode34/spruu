@@ -122,9 +122,9 @@
 
 .rating-box {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 20% 80%;
     align-self: center;
-    justify-items: end;
+    justify-items: space-between;
     margin: 2rem 0;
 
 
@@ -197,9 +197,11 @@ textarea::placeholder {
 
 }
 
+
+
 .w {
 
-    padding: 1.3rem 13.68rem;
+    padding: 1.3rem 12.8rem;
 
     @media only screen and (max-width: 70rem) {
         padding: 1rem 8rem;

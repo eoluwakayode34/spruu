@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 import axios from 'axios'
 
 
-
-
 class AutoComplete extends React.Component {
   constructor() {
     super();
@@ -15,8 +13,12 @@ class AutoComplete extends React.Component {
       value: '',
       suggestions: [],
       isLoaded: false
-    };    
+    };   
+    
+    this.lastRequestId = null;
   }
+
+  
 
   onChange = (event, { newValue, method }) => {
     this.setState({
@@ -25,7 +27,6 @@ class AutoComplete extends React.Component {
   };
   
   onSuggestionsFetchRequested = ({ value }) => {
-
       const escapedValue = value.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       
       if (escapedValue === '') {
@@ -38,7 +39,7 @@ class AutoComplete extends React.Component {
       const regex = new RegExp('^' + escapedValue, 'i');
     
       try{
-        axios('http://13.244.78.114:4000/spruu/api/v1/user/lecturers')
+        axios('http://13.244.171.145:4000/spruu/api/v1/user/lecturers')
                
         .then(users => {
           const lecturer = users.data.data.filter(name => regex.test(name.fullName))
@@ -66,6 +67,10 @@ class AutoComplete extends React.Component {
     });
   };
 
+  shouldRenderSuggestions(value) {
+    return value.trim().length > 2;
+  }
+
  
 
   render() {
@@ -73,7 +78,7 @@ class AutoComplete extends React.Component {
 
 
     const inputProps = {
-      placeholder: "Type name of Lecturer" ,
+      placeholder: "Type Name Of Lecturer" ,
       value,
       onChange: this.onChange
     };
@@ -94,25 +99,28 @@ class AutoComplete extends React.Component {
         getSuggestionValue={function getSuggestionValue(suggestion) {
           return suggestion.name;
         }}
+        shouldRenderSuggestions = {this.shouldRenderSuggestions}
         renderSuggestion={(suggestion) => {
+          
           return (
 
-
+            
             <Link
             to={ `/lecturer-review-result/${suggestion._id}`}
             key={suggestion._id}
-            className='suggestion-list'
-           
+            className='suggestion-list'         
 
             >
-              
-                              <span className='suggestion-heading'>{suggestion.fullName}</span>
+                          <span className='suggestion-heading'>{suggestion.fullName}</span>
                           <div className='sub-suggestion-heading'>{suggestion.institution}</div>
 
             </Link>
           );
         }}
         inputProps={inputProps} />
+
+        
+        
     );
   }
 }
